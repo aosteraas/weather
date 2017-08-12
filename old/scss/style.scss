@@ -1,0 +1,123 @@
+// vars
+$blue: #1E90FF;
+$grey: #808080;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1 {
+    font-family: 'Raleway', sans-serif;
+    color: #FFF;
+    margin:0;
+    padding: 15px;
+}
+
+body,
+main,
+section {
+
+    height: 100%;
+}
+body {
+    margin: 0;
+
+    .navbar h1 {
+        background: #000;
+        text-align: center;
+    }
+}
+
+// a continaer is more of a help, and should be resued more, so lets not nest things in it like that
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#weather {
+    max-width:500px;
+    margin-top: 15px;
+    
+    .current,
+    .forecast {
+        text-align: center;
+        border: 1px solid $grey;
+        border-radius:5px;
+    }
+    // usually put the more specific/non-mutli selector below the multi one to ensure it overrides it if required (not required in this case but good habit)
+    .current {
+        margin: 0 2px 5px 2px;
+    }
+
+    .forecast-container {
+        height:120px;
+        display: flex;
+        justify-content: space-around;
+
+        .forecast {
+            float: left;
+            width: 13%;
+
+            .min {
+                color: #1E90FF;
+            }
+            .max {
+                color: #FF4500;
+            }
+            .temp {
+                display: inline-block; 
+                width: 100%;
+            }
+    
+            // again move this in here from the bottom of the file and use the parent
+            & > span:first-child {
+                display: block;
+            }
+        }
+    }
+    .show-temp {
+        background: $blue;
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 5px;
+        color: #FFF;
+        text-align: center;
+    }
+    .show-temp:hover {
+       background: #00BFFF;
+    }
+}   
+
+#popup, #popupLoading {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #FFF;
+    z-index: 999;
+    margin-top: 59px;
+
+    .popup-content {
+        max-width: 480px;
+        margin:0 auto;
+        text-align: center;
+
+        .show-temp {
+            background: $blue;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 5px;
+            color: #FFF;
+            text-align: center;
+
+            &:hover {
+               background: #00BFFF;
+            }
+        }
+    }
+}
+
+
