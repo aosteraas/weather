@@ -7,8 +7,8 @@ const request = require('request');
 router.post('/weather', (req, res) => {
   let apiUrl = `https://api.darksky.net/forecast/${process.env.DARK_SKY_KEY}/${req.body.lat},${req.body.lon}?units=auto`;
   request(apiUrl, (error, response, body) => {
-    let forecast = JSON.parse(body);
-    res.json({ data: forecast });
+    let weather = JSON.parse(body);
+    res.json({ weather });
   });
 
 });
