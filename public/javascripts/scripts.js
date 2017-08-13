@@ -44,18 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 });
 
-function weatherLookup (lat, lon) {
+function weatherLookup(lat, lon) {
   axios.post('/api/weather', {
     lat: lat,
     lon: lon
   }).then((response) => {
-    console.log(response.data);
+    let weather = response.data.weather;
+    displayWeather(weather);
+    console.log(weather);
   }).catch((error) => {
     console.log(error);
   });
 }
 
-function reverseGeoLookup (lat, lon) {
+function reverseGeoLookup(lat, lon) {
   axios.post('/api/location', {
     lat: lat,
     lon: lon
@@ -66,24 +68,62 @@ function reverseGeoLookup (lat, lon) {
   });
 }
 
-function showLocation (loc) {
+function displayWeather(weather) {
+  let c = weather.currently;
+  document.querySelector('.current').innerHTML = '<div class="column">' +
+      `<p>${c.summary}, ${c.temperature}º</p>` +
+      `<p>Cloud Coverage: ${asPercentageText(c.cloudCover)}</p>` +
+      `<p>Humidity: ${asPercentageText(c.humidity)}</p>` +
+      '</div>' +
+      '<div class="column">'+
+      `<p>Chance of Rain: ${asPercentageText(c.precipProbability)}</p>` +
+      `<p>Wind Speed: ${c.windSpeed}</p>` +
+      `<p>Wind Gusts: ${c.windGust}</p>` +
+      '</div>' +
+      '<div class="column">'+
+      `<p>UV Index: ${c.uvIndex}</p>` +
+      `<p>Forecast at: ${dateGenerator(c.time)}</p>` +
+      '</div>';
+  // c.icon
+  // c.temperature
+  // c.pressure
+  // c.windBearing -- needs to be calculated, come back to this.
+
+}
+
+function dateGenerator(time) {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  let d = new Date(time * 1000);
+  return `${hourMinFormatter(d.getHours())}:${hourMinFormatter(d.getMinutes())} - ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
+}
+
+function hourMinFormatter(time) {
+  return time < 10 ? `0${time}` : time;
+}
+
+function asPercentageText(num) {
+  return `${(num * 100)}%`;
+}
+
+function showLocation(loc) {
   let locEl = document.querySelector('.location-details');
   locEl.innerText = `${loc.suburb}, ${loc.city}, ${loc.state}, ${loc.country}`;
 }
 
-function showLatLon (pos, latEl, lonEl) {
+function showLatLon(pos, latEl, lonEl) {
   latEl.innerText = `Latitude: ${pos.coords.latitude}`;
   lonEl.innerText = `Longitude: ${pos.coords.longitude}`;
 }
 
-function getPosition () {
+function getPosition() {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
 // func to check if browser supports geolocation
-function geoCheck () {
+function geoCheck() {
   if ("geolocation" in navigator) {
     localStorage.setItem('geoPermission', "true");
     return true;
