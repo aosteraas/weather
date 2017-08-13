@@ -39,7 +39,7 @@ function showLatLon(pos, latEl, lonEl) {
   latEl.innerText = `Latitude: ${pos.coords.latitude}`;
   lonEl.innerText = `Longitude: ${pos.coords.longitude}`;
 }
-// 'https://maps.googleapis.com/maps/api/geocode/json?latlng=-37.7680066,144.9556877&key=AIzaSyBU6f9scZpIBUq0BJwEuyMI25g1Recm7FQ';
+
 function getPosition () {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);

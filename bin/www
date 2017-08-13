@@ -7,6 +7,7 @@
 const app = require('../app');
 const debug = require('debug')('weather:server');
 const http = require('http');
+const dotenv = require('dotenv').config();
 
 /**
  * Get port from environment and store in Express.
