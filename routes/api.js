@@ -1,18 +1,32 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
+const request = require('request');
 
 // get weather
-router.get('/weather', (req, res, next) => {
-  res.json({ msg: 'test'});
+router.post('/weather', (req, res) => {
+  let apiUrl = `https://api.darksky.net/forecast/${process.env.DARK_SKY_KEY}/${req.body.lat},${req.body.lon}?units=auto`;
+  request(apiUrl, (error, response, body) => {
+    let forecast = JSON.parse(body);
+    res.json({ data: forecast });
+  });
+
 });
 
 // get user location from google
 router.post('/location', (req, res) => {
-  let lat = req.body.lat;
-  let lon = req.body.lon;
-  let key = process.env.GMAPS_KEY;
-  let apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=${key}`;
-
+  let apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${req.body.lat},${req.body.lon}&key=${process.env.GMAPS_KEY}`;
+  request(apiUrl, (error, response, body) => {
+    let location = JSON.parse(body).results[2];
+    let addr = location.address_components;
+    let suburb = JSON.parse(body).results[0].address_components[2].long_name;
+    let result = {
+      suburb: suburb,
+      city: addr[0].long_name,
+      state: addr[1].short_name,
+      country: addr[2].short_name
+    };
+    res.json({ result });
+  });
 });
 module.exports = router;
