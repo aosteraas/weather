@@ -70,7 +70,9 @@ function reverseGeoLookup(lat, lon) {
 
 function displayWeather(weather) {
   let c = weather.currently;
-  document.querySelector('.current').innerHTML = '<div class="column">' +
+  document.querySelector('.current').innerHTML =
+      '<div class="column">' +
+      '<canvas width="80" height="80" class="current-weather-icon"></canvas>'+
       `<p>${c.summary}, ${c.temperature}º</p>` +
       `<p>Cloud Coverage: ${asPercentageText(c.cloudCover)}</p>` +
       `<p>Humidity: ${asPercentageText(c.humidity)}</p>` +
@@ -83,9 +85,18 @@ function displayWeather(weather) {
       '<div class="column">'+
       `<p>UV Index: ${c.uvIndex}</p>` +
       `<p>Forecast at: ${dateGenerator(c.time)}</p>` +
+      '</div>' +
+      '</div>' +
+      '<div class="column">'+
+      ''+
       '</div>';
-  // c.icon
-  // c.temperature
+
+      // init skycons, resizeClean should fix an android compatability error
+      const skycons = new Skycons({"color": "black"});
+
+      // grab current weather canvas element to apply skycon
+      let currentID = document.querySelector('.current-weather-icon');
+      skycons.set(currentID, c.icon);
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
 
