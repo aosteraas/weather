@@ -1,3 +1,4 @@
+'use strict';
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
@@ -7,8 +8,7 @@ const bodyParser = require('body-parser');
 const sassMiddleware = require('node-sass-middleware');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
-
+const api = require('./routes/api');
 const app = express();
 
 // view engine setup
@@ -29,7 +29,8 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/api', api);
+// app.use('/api', apiRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
