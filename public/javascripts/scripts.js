@@ -70,36 +70,50 @@ function reverseGeoLookup(lat, lon) {
 
 function displayWeather(weather) {
   let c = weather.currently;
+
   document.querySelector('.current').innerHTML =
-      '<div class="column">' +
-      '<canvas width="80" height="80" class="current-weather-icon"></canvas>'+
-      `<p>${c.summary}, ${c.temperature}º</p>` +
-      `<p>Cloud Coverage: ${asPercentageText(c.cloudCover)}</p>` +
-      `<p>Humidity: ${asPercentageText(c.humidity)}</p>` +
-      '</div>' +
-      '<div class="column">'+
-      `<p>Chance of Rain: ${asPercentageText(c.precipProbability)}</p>` +
-      `<p>Wind Speed: ${c.windSpeed}</p>` +
-      `<p>Wind Gusts: ${c.windGust}</p>` +
-      '</div>' +
-      '<div class="column">'+
-      `<p>UV Index: ${c.uvIndex}</p>` +
-      `<p>Forecast at: ${dateGenerator(c.time)}</p>` +
-      '</div>' +
-      '</div>' +
-      '<div class="column">'+
-      ''+
-      '</div>';
+      `<div class="column">
+        <canvas width="80" height="80" class="is-skycon" data-skycon="${c.icon}"></canvas>
+        <p>${c.summary}, ${c.temperature}º</p> 
+        <p>Cloud Coverage: ${asPercentageText(c.cloudCover)}</p> 
+        <p>Humidity: ${asPercentageText(c.humidity)}</p> 
+      </div> 
+      <div class="column">
+        <p>Chance of Rain: ${asPercentageText(c.precipProbability)}</p> 
+        <p>Wind Speed: ${c.windSpeed}</p> 
+        <p>Wind Gusts: ${c.windGust}</p> 
+      </div> 
+      <div class="column">
+        <p>UV Index: ${c.uvIndex}</p> 
+        <p>Forecast at: ${dateGenerator(c.time)}</p>
+      </div>`;
 
-      // init skycons, resizeClean should fix an android compatability error
-      const skycons = new Skycons({"color": "black"});
-
-      // grab current weather canvas element to apply skycon
-      let currentID = document.querySelector('.current-weather-icon');
-      skycons.set(currentID, c.icon);
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
+  let forecast = weather.daily.data;
+  forecast.shift(); // chop first element from array as it is the current day's forecast and not required.
+  let forecastHtml = [];
+  forecast.forEach((f) => {
+    console.log(f);
+    forecastHtml
+        .push(`<div class="column">
+                <canvas width="80" height="80" class="is-skycon" data-skycon="${f.icon}"></canvas>
+                <p>Low: ${f.temperatureMin} | High: ${f.temperatureMax}</p>
+                <p>Chance of Rain ${asPercentageText(f.precipProbability)}</p>
+    
+              </div>`);
+  });
+  document.querySelector('.forecast').innerHTML = forecastHtml.join('');
+  skyconUp();
+}
 
+function skyconUp() {
+  // init skycons, resizeClean should fix an android compatability error
+  const skycons = new Skycons({"color": "black"});
+  let icons = document.querySelectorAll('.is-skycon');
+  icons.forEach((icon) => {
+    skycons.set(icon, icon.dataset.skycon);
+  });
 }
 
 function dateGenerator(time) {
@@ -114,7 +128,7 @@ function hourMinFormatter(time) {
 }
 
 function asPercentageText(num) {
-  return `${(num * 100)}%`;
+  return `${Math.round(num * 100)}%`;
 }
 
 function showLocation(loc) {
