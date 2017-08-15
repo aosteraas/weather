@@ -138,7 +138,7 @@ function dayGenerator(date) {
 }
 
 function displayForecast(forecast) {
-  let forecastHtml = [];
+  let forecastHtml = [`<div class="column"><hr><h5 class="title is-5 has-text-centered">${forecast.length} Day Forecast</h5><hr><div class="columns">`];
   forecast.forEach((f) => {
     forecastHtml
         .push(`<div class="column">
@@ -151,12 +151,13 @@ function displayForecast(forecast) {
                 </div>
               </div>`);
   });
+  forecastHtml.push('</div></div>');
   document.querySelector('.forecast').innerHTML = forecastHtml.join('');
 }
 
 function skyconUp() {
   // init skycons, resizeClean should fix an android compatability error
-  const skycons = new Skycons({"color": "black"});
+  const skycons = new Skycons({"color": "dodgerblue"});
   let icons = document.querySelectorAll('.is-skycon');
   icons.forEach((icon) => {
     skycons.set(icon, icon.dataset.skycon);
