@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showLatLon(pos, latEl, lonEl);
         weatherLookup(lat, lon);
         reverseGeoLookup(lat, lon);
-        console.log(pos);
       });
     } else {
       locMsg.innerText = geoErrMsg;
@@ -51,7 +50,6 @@ function weatherLookup(lat, lon) {
   }).then((response) => {
     let weather = response.data.weather;
     displayWeather(weather);
-    console.log(weather);
   }).catch((error) => {
     console.log(error);
   });
@@ -70,7 +68,12 @@ function reverseGeoLookup(lat, lon) {
 
 function displayWeather(weather) {
   let c = weather.currently;
-
+  let forecast = weather.daily.data;
+  let todaysForecast = forecast.shift();
+  console.log(weather);
+  // TODO - add the following
+  // c.pressure
+  // c.windBearing -- needs to be calculated, come back to this.
   document.querySelector('.current').innerHTML =
       `<div class="column">
         <canvas width="80" height="80" class="is-skycon" data-skycon="${c.icon}"></canvas>
@@ -88,13 +91,8 @@ function displayWeather(weather) {
         <p>Forecast at: ${dateGenerator(c.time)}</p>
       </div>`;
 
-  // c.pressure
-  // c.windBearing -- needs to be calculated, come back to this.
-  let forecast = weather.daily.data;
-  forecast.shift(); // chop first element from array as it is the current day's forecast and not required.
   let forecastHtml = [];
   forecast.forEach((f) => {
-    console.log(f);
     forecastHtml
         .push(`<div class="column">
                 <canvas width="80" height="80" class="is-skycon" data-skycon="${f.icon}"></canvas>
@@ -113,6 +111,7 @@ function skyconUp() {
   let icons = document.querySelectorAll('.is-skycon');
   icons.forEach((icon) => {
     skycons.set(icon, icon.dataset.skycon);
+    skycons.play();
   });
 }
 
