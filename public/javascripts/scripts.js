@@ -2,12 +2,14 @@
 
 const geoErrMsg = "Unfortunately your browser does not support Geolocation or Geolocation failed. Please proceed to enter your location manually.";
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dqs = (query) => document.querySelector(query);
+const dqsa = (query) => document.querySelectorAll(query);
 
 document.addEventListener('DOMContentLoaded', () => {
-  let modal = document.querySelector('.location-check');
-  let locMsg = document.querySelector('.modal .location-message');
-  let latEl = document.querySelector('.latitude');
-  let lonEl = document.querySelector('.longitude');
+  let modal = dqs('.location-check');
+  let locMsg = dqs('.modal .location-message');
+  let latEl = dqs('.latitude');
+  let lonEl = dqs('.longitude');
   let lat, lon;
   // check if location permission has previously been granted
   if (localStorage.geoPermission === "true") {
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       locMsg.innerText = geoErrMsg;
     });
   }
-  document.querySelector('.modal .button').addEventListener('click', () => {
+  dqs('.modal .button').addEventListener('click', () => {
     if (geoCheck()) {
       modal.classList.remove('is-active');
       getPosition().then((pos) => {
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       locMsg.innerText = geoErrMsg;
     }
   });
-  document.querySelector('.modal-close').addEventListener('click', () => {
+  dqs('.modal-close').addEventListener('click', () => {
     modal.classList.remove('is-active');
   })
 });
@@ -84,7 +86,7 @@ function displayCurrent(currently, todaysForecast, location) {
   // TODO - add the following
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
-  document.querySelector('.current').innerHTML =
+  dqs('.current').innerHTML =
       `<div class="column">
         <div class="box">
           <div class="columns">
@@ -152,14 +154,13 @@ function displayForecast(forecast) {
               </div>`);
   });
   forecastHtml.push('</div></div>');
-  document.querySelector('.forecast').innerHTML = forecastHtml.join('');
+  dqs('.forecast').innerHTML = forecastHtml.join('');
 }
 
 function skyconUp() {
   // init skycons, resizeClean should fix an android compatability error
   const skycons = new Skycons({"color": "dodgerblue"});
-  let icons = document.querySelectorAll('.is-skycon');
-  icons.forEach((icon) => {
+  dqsa('.is-skycon').forEach((icon) => {
     skycons.set(icon, icon.dataset.skycon);
     skycons.play();
   });
