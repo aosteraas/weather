@@ -14,11 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     getPosition().then((pos) => {
       lat = pos.coords.latitude;
       lon = pos.coords.longitude;
+      getWeatherAndLocation(lat, lon);
       // remove modal on success
       modal.classList.remove('is-active');
-      showLatLon(pos, latEl, lonEl);
-      weatherLookup(lat, lon);
-      reverseGeoLookup(lat, lon);
       console.log(pos);
     }).catch((err) => {
       locMsg.innerText = geoErrMsg;
@@ -30,9 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       getPosition().then((pos) => {
         lat = pos.coords.latitude;
         lon = pos.coords.longitude;
-        showLatLon(pos, latEl, lonEl);
-        weatherLookup(lat, lon);
-        reverseGeoLookup(lat, lon);
+        getWeatherAndLocation(lat, lon);
       });
     } else {
       locMsg.innerText = geoErrMsg;
@@ -43,26 +39,32 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 });
 
+function getWeatherAndLocation(lat, lon) {
+  axios.all([weatherLookup(lat,lon), reverseGeoLookup(lat,lon)]).then(axios.spread( (weather,geo) => {
+    console.log(weather);
+    console.log(geo);
+  }));
+}
+
 function weatherLookup(lat, lon) {
-  axios.post('/api/weather', {
+  return axios.post('/api/weather', {
     lat: lat,
     lon: lon
   }).then((response) => {
-    let weather = response.data.weather;
-    displayWeather(weather);
+    return response;
   }).catch((error) => {
-    console.log(error);
+    return error;
   });
 }
 
 function reverseGeoLookup(lat, lon) {
-  axios.post('/api/location', {
+  return axios.post('/api/location', {
     lat: lat,
     lon: lon
   }).then((geo) => {
-    showLocation(geo.data.result)
+    return geo;
   }).catch((error) => {
-    console.log(error);
+    return error;
   });
 }
 
