@@ -1,6 +1,7 @@
 'use strict';
 
 const geoErrMsg = "Unfortunately your browser does not support Geolocation or Geolocation failed. Please proceed to enter your location manually.";
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 document.addEventListener('DOMContentLoaded', () => {
   let modal = document.querySelector('.location-check');
@@ -40,9 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getWeatherAndLocation(lat, lon) {
-  axios.all([weatherLookup(lat,lon), reverseGeoLookup(lat,lon)]).then(axios.spread( (weather,geo) => {
-    console.log(weather);
-    console.log(geo);
+  axios
+      .all([weatherLookup(lat,lon), reverseGeoLookup(lat,lon)])
+      .then(axios.spread( (weather,geo) => {
+        displayWeather(weather.weather, geo.result)
   }));
 }
 
@@ -51,7 +53,7 @@ function weatherLookup(lat, lon) {
     lat: lat,
     lon: lon
   }).then((response) => {
-    return response;
+    return response.data;
   }).catch((error) => {
     return error;
   });
@@ -62,49 +64,94 @@ function reverseGeoLookup(lat, lon) {
     lat: lat,
     lon: lon
   }).then((geo) => {
-    return geo;
+    return geo.data;
   }).catch((error) => {
     return error;
   });
 }
 
-function displayWeather(weather) {
+function displayWeather(weather, location) {
   let c = weather.currently;
   let forecast = weather.daily.data;
   let todaysForecast = forecast.shift();
-  console.log(weather);
+  displayCurrent(c, todaysForecast, location);
+  displayForecast(forecast);
+  skyconUp();
+}
+
+function displayCurrent(currently, todaysForecast, location) {
+  console.log(todaysForecast);
   // TODO - add the following
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
   document.querySelector('.current').innerHTML =
       `<div class="column">
-        <canvas width="80" height="80" class="is-skycon" data-skycon="${c.icon}"></canvas>
-        <p>${c.summary}, ${c.temperature}º</p> 
-        <p>Cloud Coverage: ${asPercentageText(c.cloudCover)}</p> 
-        <p>Humidity: ${asPercentageText(c.humidity)}</p> 
-      </div> 
-      <div class="column">
-        <p>Chance of Rain: ${asPercentageText(c.precipProbability)}</p> 
-        <p>Wind Speed: ${c.windSpeed}</p> 
-        <p>Wind Gusts: ${c.windGust}</p> 
-      </div> 
-      <div class="column">
-        <p>UV Index: ${c.uvIndex}</p> 
-        <p>Forecast at: ${dateGenerator(c.time)}</p>
+        <div class="box">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <h4 class="title is-4">${location.suburb}, ${location.state}, ${location.country}</h4>
+              <p class="subtitle">${dateGenerator(currently.time)}</p>
+            </div>
+          </div>
+          <div class="columns">
+              <div class="column is-3 has-text-centered">
+              <canvas width="80" height="80" class="is-skycon" data-skycon="${currently.icon}"></canvas>
+              <p>${currently.temperature}º, ${currently.summary}</p>        
+            </div>
+            <div class="column">
+              <div class="columns">
+                <div class="column">
+                  Cloud Coverage: ${asPercentageText(currently.cloudCover)}<br>
+                  Humidity: ${asPercentageText(currently.humidity)}<br>
+                  Chance of Rain: ${asPercentageText(currently.precipProbability)}<br>
+                </div>
+                <div class="column">
+                  UV Index: ${currently.uvIndex}<br>
+                  Wind Speed: ${currently.windSpeed}<br>
+                  Wind Gusts: ${currently.windGust} <br>          
+                </div>
+                <div class="column">
+                  Sunrise: ${timeGenerator(todaysForecast.sunriseTime)}<br>
+                  Sunset: ${timeGenerator(todaysForecast.sunsetTime)}
+                </div>
+              </div> <!--top-->
+              <div class="columns">
+                <div class="column">
+                  <p><strong>Summary: </strong>${todaysForecast.summary}</p>
+                </div>
+              </div> <!--bottom-->
+            </div>
+          </div>
+        </div>
       </div>`;
+}
 
+function timeGenerator(date) {
+  let d = new Date(date*1000);
+  let h = hourMinFormatter(d.getHours());
+  let m = hourMinFormatter(d.getMinutes());
+  return `${h}:${m}`;
+}
+
+function dayGenerator(date) {
+  return days[new Date(date*1000).getDay()];
+}
+
+function displayForecast(forecast) {
   let forecastHtml = [];
   forecast.forEach((f) => {
     forecastHtml
         .push(`<div class="column">
-                <canvas width="80" height="80" class="is-skycon" data-skycon="${f.icon}"></canvas>
-                <p>Low: ${f.temperatureMin} | High: ${f.temperatureMax}</p>
-                <p>Chance of Rain ${asPercentageText(f.precipProbability)}</p>
-    
+                <div class="box">
+                  <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
+                  <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
+                  <p>Low: ${f.temperatureMin}</p>
+                  <p>High: ${f.temperatureMax}</p>
+                  <p>Rain ${asPercentageText(f.precipProbability)}</p>
+                </div>
               </div>`);
   });
   document.querySelector('.forecast').innerHTML = forecastHtml.join('');
-  skyconUp();
 }
 
 function skyconUp() {
@@ -118,7 +165,6 @@ function skyconUp() {
 }
 
 function dateGenerator(time) {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   let d = new Date(time * 1000);
   return `${hourMinFormatter(d.getHours())}:${hourMinFormatter(d.getMinutes())} - ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
