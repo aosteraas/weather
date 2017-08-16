@@ -5742,7 +5742,7 @@ label.panel-block {
     padding-top: 2px;
     margin-bottom: -2px; }
     .info-item .info-icon object {
-      max-height: 36px; }
+      height: 36px; }
   .info-item .info-time {
     background: #363636;
     color: #F5F5F5; }

@@ -159,8 +159,11 @@ function displayForecast(forecast) {
                  <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
                    <div class="box">
                    <div class="columns">
-                     <div class="column">
+                     <div class="column is-2">
                        <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
+                     </div>
+                     <div class="column is-2">
+                        <p><strong>Summary: </strong>${f.summary}</p>
                      </div>
                    <div class="column">
                      <div class="info-item has-text-centered">
