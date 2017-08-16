@@ -72,7 +72,9 @@ function reverseGeoLookup(lat, lon) {
 }
 
 function displayWeather(weather, location) {
+  console.log(weather);
   let c = weather.currently;
+  let units = weather.flags.units;
   let forecast = weather.daily.data;
   let todaysForecast = forecast.shift();
   displayCurrent(c, todaysForecast, location);
@@ -142,17 +144,37 @@ function dayGenerator(date) {
 function displayForecast(forecast) {
   console.log(forecast);
   let forecastHtml = [`<h5 class="title is-5 has-text-centered">${forecast.length} Day Forecast</h5><hr>`];
+  // interesting things
+  // cloudCover
+  // humidity
+  // moonPhase
+  // pressure
+  // summary
+  // sunrise
+  // sunset
+  // uvIndex && uvIndexTime
+  // windSpeed
+  // windGust
   forecast.forEach((f) => {
     forecastHtml
         .push(`<div class="columns">
-                <div class="column">
-                <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
-                <div class="box">
-                  <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
-                  <p>Low: ${f.temperatureMin}</p>
-                  <p>High: ${f.temperatureMax}</p>
-                  <p>Rain ${asPercentageText(f.precipProbability)}</p>
-                </div>
+                 <div class="column">
+                 <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
+                   <div class="box">
+                   <div class="columns">
+                     <div class="column">
+                       <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
+                       <p><object data="images/icons/thermometer-25-small.svg" type="image/svg+xml"></object> ${f.temperatureMin}</p>
+                       <p><object data="images/icons/thermometer-100-small.svg" type="image/svg+xml"></object> ${f.temperatureMax}</p>  
+                     </div>
+                   <div class="column"></div>
+                   <div class="column"></div>
+                   <div class="column"></div>
+                   <div class="column"></div>
+                   </div>
+                     
+                     <p>Rain ${asPercentageText(f.precipProbability)}</p>
+                   </div>
                 </div>
               </div>`);
   });
