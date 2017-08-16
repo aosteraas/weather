@@ -8,3 +8,21 @@
     }
   }
 }
+// other shit to move into another file
+.info-item {
+  border: 1px solid $dark-bg;
+  border-radius: 3px;
+  display: inline-grid;
+  min-width: 54px;
+  .info-icon {
+    padding-top: 2px;
+    margin-bottom: -2px;
+    object {
+      max-height: 36px;
+    }
+  }
+  .info-time {
+    background: $dark-bg;
+    color: $whitesmoke;
+  }
+}

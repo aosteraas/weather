@@ -150,10 +150,7 @@ function displayForecast(forecast) {
   // moonPhase
   // pressure
   // summary
-  // sunrise
-  // sunset
   // uvIndex && uvIndexTime
-  // windSpeed
   // windGust
   forecast.forEach((f) => {
     forecastHtml
@@ -164,16 +161,32 @@ function displayForecast(forecast) {
                    <div class="columns">
                      <div class="column">
                        <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
-                       <p><object data="images/icons/thermometer-25-small.svg" type="image/svg+xml"></object> ${f.temperatureMin}</p>
-                       <p><object data="images/icons/thermometer-100-small.svg" type="image/svg+xml"></object> ${f.temperatureMax}</p>  
                      </div>
-                   <div class="column"></div>
-                   <div class="column"></div>
-                   <div class="column"></div>
-                   <div class="column"></div>
-                   </div>
-                     
-                     <p>Rain ${asPercentageText(f.precipProbability)}</p>
+                   <div class="column">
+                     <div class="info-item has-text-centered">
+                       <div class="info-icon"><object data="images/icons/thermometer-25-small.svg" type="image/svg+xml"></object></div>
+                       <div class="info-time">${f.temperatureMin}</div>
+                     </div>
+                     <div class="info-item has-text-centered">
+                       <div class="info-icon"><object data="images/icons/thermometer-100-small.svg" type="image/svg+xml"></object></div>
+                       <div class="info-time">${f.temperatureMax}</div>
+                     </div>
+                     <div class="info-item has-text-centered">
+                        <div class="info-icon"><object data="images/icons/sunrise-small.svg" type="image/svg+xml"></object></div>
+                        <div class="info-time">${timeGenerator(f.sunriseTime)}</div>
+                     </div>
+                     <div class="info-item has-text-centered">
+                        <div class="info-icon"><object data="images/icons/sunset-small.svg" type="image/svg+xml"></object></div>
+                        <div class="info-time">${timeGenerator(f.sunsetTime)}</div>
+                     </div>
+                     <div class="info-item has-text-centered">
+                        <div class="info-icon"><object data="images/icons/cloud-rain-small.svg" type="image/svg+xml"></object></div>
+                        <div class="info-time">${asPercentageText(f.precipProbability)}</div>
+                     </div>
+                     <div class="info-item has-text-centered">
+                        <div class="info-icon"><object data="images/icons/wind-small.svg" type="image/svg+xml"></object></div>
+                        <div class="info-time">${f.windSpeed}Km/h</div>
+                     </div>
                    </div>
                 </div>
               </div>`);
