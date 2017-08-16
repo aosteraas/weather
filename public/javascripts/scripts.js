@@ -85,7 +85,8 @@ function displayCurrent(currently, todaysForecast, location) {
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
   dqs('.current').innerHTML =
-      `<div class="column">
+      `<div class="columns">
+        <div class="column">
         <div class="box">
           <div class="columns">
             <div class="column has-text-centered">
@@ -123,6 +124,7 @@ function displayCurrent(currently, todaysForecast, location) {
             </div>
           </div>
         </div>
+      </div>
       </div>`;
 }
 
@@ -138,20 +140,23 @@ function dayGenerator(date) {
 }
 
 function displayForecast(forecast) {
-  let forecastHtml = [`<div class="column"><hr><h5 class="title is-5 has-text-centered">${forecast.length} Day Forecast</h5><hr><div class="columns">`];
+  console.log(forecast);
+  let forecastHtml = [`<h5 class="title is-5 has-text-centered">${forecast.length} Day Forecast</h5><hr>`];
   forecast.forEach((f) => {
     forecastHtml
-        .push(`<div class="column">
+        .push(`<div class="columns">
+                <div class="column">
+                <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
                 <div class="box">
-                  <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
                   <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
                   <p>Low: ${f.temperatureMin}</p>
                   <p>High: ${f.temperatureMax}</p>
                   <p>Rain ${asPercentageText(f.precipProbability)}</p>
                 </div>
+                </div>
               </div>`);
   });
-  forecastHtml.push(`</div></div>`);
+  forecastHtml.push(`</div>`);
   dqs('.forecast').innerHTML = forecastHtml.join('');
 }
 
