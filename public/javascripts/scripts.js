@@ -1,15 +1,15 @@
 'use strict';
 
-const geoErrMsg = "Unfortunately your browser does not support Geolocation or Geolocation failed. Please proceed to enter your location manually.";
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const dqs = (query) => document.querySelector(query);
 const dqsa = (query) => document.querySelectorAll(query);
+
+const geoErrMsg = "Unfortunately your browser does not support Geolocation or Geolocation failed. Please proceed to enter your location manually.";
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 document.addEventListener('DOMContentLoaded', () => {
   let modal = dqs('.location-check');
   let locMsg = dqs('.modal .location-message');
-  let latEl = dqs('.latitude');
-  let lonEl = dqs('.longitude');
   let lat, lon;
   // check if location permission has previously been granted
   if (localStorage.geoPermission === "true") {
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
       getWeatherAndLocation(lat, lon);
       // remove modal on success
       modal.classList.remove('is-active');
-      console.log(pos);
     }).catch((err) => {
       locMsg.innerText = geoErrMsg;
     });
@@ -82,7 +81,6 @@ function displayWeather(weather, location) {
 }
 
 function displayCurrent(currently, todaysForecast, location) {
-  console.log(todaysForecast);
   // TODO - add the following
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
@@ -153,12 +151,11 @@ function displayForecast(forecast) {
                 </div>
               </div>`);
   });
-  forecastHtml.push('</div></div>');
+  forecastHtml.push(`</div></div>`);
   dqs('.forecast').innerHTML = forecastHtml.join('');
 }
 
 function skyconUp() {
-  // init skycons, resizeClean should fix an android compatability error
   const skycons = new Skycons({"color": "dodgerblue"});
   dqsa('.is-skycon').forEach((icon) => {
     skycons.set(icon, icon.dataset.skycon);
@@ -167,7 +164,6 @@ function skyconUp() {
 }
 
 function dateGenerator(time) {
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   let d = new Date(time * 1000);
   return `${hourMinFormatter(d.getHours())}:${hourMinFormatter(d.getMinutes())} - ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
 }
