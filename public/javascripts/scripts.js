@@ -156,7 +156,6 @@ function displayForecast(forecast) {
                 </div>
               </div>`);
   });
-  forecastHtml.push(`</div>`);
   dqs('.forecast').innerHTML = forecastHtml.join('');
 }
 
