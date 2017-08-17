@@ -93,13 +93,13 @@ function displayCurrent(currently, todaysForecast, location, units) {
           <div class="columns">
             <div class="column has-text-centered">
               <h4 class="title is-4">${location.suburb}, ${location.state}, ${location.country}</h4>
-              <p class="subtitle">${dateGenerator(currently.time)}</p>
+              <p class="subtitle">${currently.temperature}${units.temp} - ${dateGenerator(currently.time)}</p>
+              <p><strong>${currently.summary}</strong> - ${todaysForecast.summary}</p>        
             </div>
           </div>
           <div class="columns">
-              <div class="column is-3 has-text-centered">
+              <div class="column is-3">
               <canvas width="80" height="80" class="is-skycon" data-skycon="${currently.icon}"></canvas>
-              <p>${currently.temperature}º, ${currently.summary}</p>        
             </div>
             <div class="column">
               <div class="columns">
@@ -110,8 +110,8 @@ function displayCurrent(currently, todaysForecast, location, units) {
                 </div>
                 <div class="column">
                   UV Index: ${currently.uvIndex}<br>
-                  Wind Speed: ${currently.windSpeed}<br>
-                  Wind Gusts: ${currently.windGust} <br>          
+                  Wind Speed: ${currently.windSpeed}${units.windSpeed}<br>
+                  Wind Gusts: ${currently.windGust}${units.windSpeed}<br>          
                 </div>
                 <div class="column">
                   Sunrise: ${timeGenerator(todaysForecast.sunriseTime)}<br>
@@ -161,17 +161,17 @@ function displayForecast(forecast, units) {
   forecast.forEach((f) => {
   forecastHtml
       .push(`<div class="columns">
-                 <div class="column">
-                 <h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>
+               <div class="column">
+                 <!--<h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>--->
                    <div class="box">
                    <div class="columns">
-                     <div class="column is-2">
-                       <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
-                     </div>
+                     <!-- <div class="column is-2">
+                        <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
+                      </div> -->
                      <div class="column">
                        <div class="columns">
                          <div class="column">
-                           <p><strong>Summary: </strong>${f.summary}</p>
+                           <p><strong>${dayGenerator(f.time)}: </strong>${f.summary}</p>
                          </div>
                        </div>
                        <div class="columns">
@@ -205,10 +205,12 @@ function displayForecast(forecast, units) {
                               <div class="info-time">${f.windSpeed}${units.windSpeed}</div>
                            </div>
                          </div>
-                        </div>
-                    </div>
-                </div>
-              </div>`);
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+               </div>`);
 
   });
   dqs('.forecast').innerHTML = forecastHtml.join('');
