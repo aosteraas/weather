@@ -74,15 +74,15 @@ function reverseGeoLookup(lat, lon) {
 function displayWeather(weather, location) {
   console.log(weather);
   let c = weather.currently;
-  let units = weather.flags.units;
+  let units = unitMapper(weather.flags.units);
   let forecast = weather.daily.data;
   let todaysForecast = forecast.shift();
-  displayCurrent(c, todaysForecast, location);
-  displayForecast(forecast);
+  displayCurrent(c, todaysForecast, location, units);
+  displayForecast(forecast, units);
   skyconUp();
 }
 
-function displayCurrent(currently, todaysForecast, location) {
+function displayCurrent(currently, todaysForecast, location, units) {
   // TODO - add the following
   // c.pressure
   // c.windBearing -- needs to be calculated, come back to this.
@@ -141,7 +141,7 @@ function dayGenerator(date) {
   return days[new Date(date*1000).getDay()];
 }
 
-function displayForecast(forecast) {
+function displayForecast(forecast, units) {
   console.log(forecast);
   const thermometerQuarter = '<svg width="16" height="37" viewBox="0 0 16 37" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M8 36.865c-4.418 0-7.998-3.58-7.998-7.998 0-2.025.758-3.87 2-5.28V6.87c0-3.313 2.686-6 5.998-6 3.314 0 6 2.687 6 6v16.718c1.24 1.41 2 3.254 2 5.28 0 4.417-3.582 7.997-8 7.997zm2-11.443V6.87c0-1.104-.895-2-2-2-1.104 0-2 .896-2 2v18.552c-1.19.693-1.998 1.97-1.998 3.445 0 2.21 1.79 3.998 3.998 3.998 2.21 0 4-1.79 4-3.998 0-1.476-.81-2.752-2-3.445zm-2 6.445c-1.656 0-2.998-1.344-2.998-3 0-1.305.836-2.402 1.998-2.816v-5.183h2v5.184c1.162.415 2 1.513 2 2.817 0 1.656-1.344 3-3 3z" fill-rule="nonzero" fill="#000"/></svg>';
   const thermometerFull = '<svg width="16" height="37" viewBox="0 0 16 37" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M8 36.867c-4.418 0-8-3.582-8-8 0-2.025.76-3.87 2-5.28V6.872c0-3.312 2.686-6 6-6 3.312 0 6 2.688 6 6V23.59c1.24 1.41 1.998 3.254 1.998 5.28 0 4.417-3.58 8-7.998 8zm2-11.445V6.87c0-1.103-.896-2-2-2-1.105 0-2 .897-2 2v18.552c-1.19.693-2 1.97-2 3.445 0 2.21 1.79 4 4 4s4-1.79 4-4c0-1.476-.81-2.752-2-3.445zm-2 6.445c-1.656 0-3-1.344-3-3 0-1.305.838-2.402 2-2.816V6.87c0-.553.447-1 1-1 .553 0 1 .447 1 1V26.05c1.162.415 2 1.513 2 2.817 0 1.656-1.344 3-3 3z" fill-rule="nonzero" fill="#000"/></svg>';
@@ -178,11 +178,11 @@ function displayForecast(forecast) {
                          <div class="column">
                            <div class="info-item has-text-centered">
                              <div class="info-icon">${thermometerQuarter}</div>
-                             <div class="info-time">${f.temperatureMin}</div>
+                             <div class="info-time">${f.temperatureMin}${units.temp}</div>
                            </div>
                            <div class="info-item has-text-centered">
                              <div class="info-icon">${thermometerFull}</object></div>
-                             <div class="info-time">${f.temperatureMax}</div>
+                             <div class="info-time">${f.temperatureMax}${units.temp}</div>
                            </div>
                            <div class="info-item has-text-centered">
                               <div class="info-icon">${sunrise}</div>
@@ -202,7 +202,7 @@ function displayForecast(forecast) {
                            </div>
                            <div class="info-item has-text-centered">
                               <div class="info-icon">${wind}</object></div>
-                              <div class="info-time">${f.windSpeed}Km/h</div>
+                              <div class="info-time">${f.windSpeed}${units.windSpeed}</div>
                            </div>
                          </div>
                         </div>
@@ -259,4 +259,22 @@ function geoCheck() {
   } else {
     return false;
   }
+}
+
+function unitMapper(units) {
+  let fmtUnits = {
+    temp: 'ºC',
+    dist: 'Km',
+    windSpeed: 'm/s'
+  };
+  if (units === "ca") {
+    fmtUnits.windSpeed = 'Km/h';
+  } else if (units === "uk2") {
+    fmtUnits.dist = 'Mi';
+  } else if (units === "us") {
+    fmtUnits.temp = 'ºF';
+    fmtUnits.dist = 'Mi';
+    fmtUnits.windSpeed = 'Mi/h';
+  }
+  return fmtUnits;
 }
