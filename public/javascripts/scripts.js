@@ -43,10 +43,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function getWeatherAndLocation(lat, lon) {
   axios
-      .all([weatherLookup(lat,lon), reverseGeoLookup(lat,lon)])
-      .then(axios.spread( (weather,geo) => {
+      .all([weatherLookup(lat, lon), reverseGeoLookup(lat, lon)])
+      .then(axios.spread((weather, geo) => {
         displayWeather(weather.weather, geo.result)
-  }));
+      }));
 }
 
 function weatherLookup(lat, lon) {
@@ -131,14 +131,14 @@ function displayCurrent(currently, todaysForecast, location, units) {
 }
 
 function timeGenerator(date) {
-  let d = new Date(date*1000);
+  let d = new Date(date * 1000);
   let h = hourMinFormatter(d.getHours());
   let m = hourMinFormatter(d.getMinutes());
   return `${h}:${m}`;
 }
 
 function dayGenerator(date) {
-  return days[new Date(date*1000).getDay()];
+  return days[new Date(date * 1000).getDay()];
 }
 
 function displayForecast(forecast, units) {
@@ -152,15 +152,14 @@ function displayForecast(forecast, units) {
   const wind = '<svg width="44" height="28" viewBox="0 0 44 28" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M38 16h-3c-1.106 0-2-.895-2-2 0-1.103.894-2 2-2h3c1.103 0 2-.895 2-1.998 0-1.105-.897-2-2-2-1.106 0-2-.896-2-2s.894-2 2-2c.136 0 .27.014.4.04 3.122.212 5.597 2.784 5.597 5.96C43.997 13.314 41.312 16 38 16zm-10-4H6c-1.104 0-2 .897-2 2 0 1.105.896 2 2 2H28c3.313 0 6 2.687 6 6 0 3.176-2.476 5.748-5.597 5.96-.13.026-.265.04-.404.04-1.105 0-2-.896-2-2 0-1.105.895-2 2-2 1.104 0 2-.896 2-2s-.896-2-2-2H6c-3.313 0-6-2.686-6-6 0-3.174 2.476-5.746 5.597-5.958.13-.026.265-.04.402-.04H28c1.104 0 2-.896 2-2s-.896-2-2-2c-1.105 0-2-.895-2-2 0-1.104.895-2 2-2 .138 0 .272.015.403.04C31.523.255 34 2.827 34 6.003c0 3.312-2.687 6-6 6z" fill-rule="nonzero" fill="#000"/></svg>';
   let forecastHtml = [`<h5 class="title is-5 has-text-centered">${forecast.length} Day Forecast</h5><hr>`];
   // interesting things
-  // cloudCover
   // humidity
   // moonPhase
   // pressure
   // uvIndex && uvIndexTime
   // windGust
   forecast.forEach((f) => {
-  forecastHtml
-      .push(`<div class="columns">
+    forecastHtml
+        .push(`<div class="columns">
                <div class="column">
                  <!--<h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>--->
                    <div class="box">
@@ -181,7 +180,7 @@ function displayForecast(forecast, units) {
                              <div class="info-time">${f.temperatureMin}${units.temp}</div>
                            </div>
                            <div class="info-item has-text-centered">
-                             <div class="info-icon">${thermometerFull}</object></div>
+                             <div class="info-icon">${thermometerFull}</div>
                              <div class="info-time">${f.temperatureMax}${units.temp}</div>
                            </div>
                            <div class="info-item has-text-centered">
@@ -193,7 +192,7 @@ function displayForecast(forecast, units) {
                               <div class="info-time">${timeGenerator(f.sunsetTime)}</div>
                            </div>
                            <div class="info-item has-text-centered">
-                              <div class="info-icon">${cloudCover}</object></div>
+                              <div class="info-icon">${cloudCover}</div>
                               <div class="info-time">${asPercentageText(f.cloudCover)}</div>
                            </div>
                            <div class="info-item has-text-centered">
@@ -201,7 +200,7 @@ function displayForecast(forecast, units) {
                               <div class="info-time">${asPercentageText(f.precipProbability)}</div>
                            </div>
                            <div class="info-item has-text-centered">
-                              <div class="info-icon">${wind}</object></div>
+                              <div class="info-icon">${wind}</div>
                               <div class="info-time">${f.windSpeed}${units.windSpeed}</div>
                            </div>
                          </div>
