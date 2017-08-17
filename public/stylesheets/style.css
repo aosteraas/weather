@@ -5741,7 +5741,7 @@ label.panel-block {
   .info-item .info-icon {
     padding-top: 2px;
     margin-bottom: -2px; }
-    .info-item .info-icon object {
+    .info-item .info-icon svg {
       height: 36px; }
   .info-item .info-time {
     background: #363636;
