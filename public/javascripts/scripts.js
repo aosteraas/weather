@@ -203,6 +203,10 @@ function displayForecast(forecast, units) {
                               <div class="info-icon">${wind}</div>
                               <div class="info-time">${f.windSpeed}${units.windSpeed}</div>
                            </div>
+                           <div class="info-item has-text-centered">
+                              <div class="info-icon">${wind}</div>
+                              <div class="info-time">${degToCompass(f.windBearing)}</div>
+                           </div>
                          </div>
                          </div>
                        </div>
@@ -278,4 +282,10 @@ function unitMapper(units) {
     fmtUnits.windSpeed = 'Mi/h';
   }
   return fmtUnits;
+}
+
+function degToCompass(num) {
+  let val = Math.floor((num / 22.5) + 0.5);
+  let arr = ["N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"];
+  return arr[(val % 16)];
 }
