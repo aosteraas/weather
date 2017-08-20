@@ -161,12 +161,8 @@ function displayForecast(forecast, units) {
     forecastHtml
         .push(`<div class="columns">
                <div class="column">
-                 <!--<h5 class="is-5 title has-text-centered">${dayGenerator(f.time)}</h5>--->
-                   <div class="box">
+                 <div class="box">
                    <div class="columns">
-                     <!-- <div class="column is-2">
-                        <canvas width="80" height="80" class="is-skycon has-text-centered" data-skycon="${f.icon}"></canvas>
-                      </div> -->
                      <div class="column">
                        <div class="columns">
                          <div class="column">
