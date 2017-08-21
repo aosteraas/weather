@@ -98,9 +98,6 @@ function displayCurrent(currently, todaysForecast, location, units) {
             </div>
           </div>
           <div class="columns">
-              <div class="column is-3">
-              <canvas width="80" height="80" class="is-skycon" data-skycon="${currently.icon}"></canvas>
-            </div>
             <div class="column">
               <div class="columns">
                 <div class="column">
