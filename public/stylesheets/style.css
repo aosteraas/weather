@@ -5733,4 +5733,18 @@ label.panel-block {
   .navbar.is-dark .navbar-brand .navbar-item {
     color: #F5F5F5; }
 
+.info-item {
+  border: 1px solid #363636;
+  border-radius: 3px;
+  display: inline-grid;
+  min-width: 54px; }
+  .info-item .info-icon {
+    padding-top: 2px;
+    margin-bottom: -2px; }
+    .info-item .info-icon svg {
+      height: 36px; }
+  .info-item .info-time {
+    background: #363636;
+    color: #F5F5F5; }
+
 /*# sourceMappingURL=style.css.map */
