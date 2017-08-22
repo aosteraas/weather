@@ -110,13 +110,13 @@ function displayCurrent(currently, todaysForecast, location, units) {
           </div>
           <div class="columns">
             <div class="column">
-              ${temperatureBadges(todaysForecast, units)}
-              ${sunriseSunsetBadges(todaysForecast)}
-              ${uvIndexBadge(currently)}
-              ${cloudCoverRainChanceBadges(currently)}
-              ${windSpeedGustBearingBadges(todaysForecast, units)}
-              ${pressureBadge(todaysForecast, units)}
-              ${humidityBadge(currently)}
+              ${badges.temp(todaysForecast, units)}
+              ${badges.sunriseSunset(todaysForecast)}
+              ${badges.uvIndex(currently)}
+              ${badges.cloudCoverRainChance(currently)}
+              ${badges.windSpeedGustBearing(todaysForecast, units)}
+              ${badges.pressure(todaysForecast, units)}
+              ${badges.humidity(currently)}
             </div>
           </div>
           <div class="columns">
@@ -162,13 +162,13 @@ function displayForecast(forecast, units) {
                        </div>
                        <div class="columns">
                          <div class="column">
-                           ${temperatureBadges(f, units)}
-                           ${sunriseSunsetBadges(f)}
-                           ${uvIndexBadge(f)}
-                           ${cloudCoverRainChanceBadges(f)}
-                           ${windSpeedGustBearingBadges(f, units)}
-                           ${pressureBadge(f, units)}
-                           ${humidityBadge(f)}
+                           ${badges.temp(f, units)}
+                           ${badges.sunriseSunset(f)}
+                           ${badges.uvIndex(f)}
+                           ${badges.cloudCoverRainChance(f)}
+                           ${badges.windSpeedGustBearing(f, units)}
+                           ${badges.pressure(f, units)}
+                           ${badges.humidity(f)}
                          </div>
                          </div>
                        </div>
@@ -180,77 +180,75 @@ function displayForecast(forecast, units) {
   dqs('.forecast').innerHTML = forecastHtml.join('');
 }
 
-
-function temperatureBadges(w, u) {
-  return `<div class="info-item has-text-centered">
-            <div class="info-icon">${icons.thermometerQuarter}</div>
-            <div class="info-time">${w.temperatureMin} ${u.temp}</div>
-          </div>
-          <div class="info-item has-text-centered">
-            <div class="info-icon">${icons.thermometerFull}</div>
-            <div class="info-time">${w.temperatureMax} ${u.temp}</div>
-          </div>`;
-}
-
-function cloudCoverRainChanceBadges(w) {
-  return `<div class="info-item has-text-centered">
-            <div class="info-icon">${icons.cloudCover}</div>
-            <div class="info-time">${format.asPercentageText(w.cloudCover)}</div>
-          </div>
-          <div class="info-item has-text-centered">
-            <div class="info-icon">${icons.rainChance}</div>
-            <div class="info-time">${format.asPercentageText(w.precipProbability)}</div>
-          </div>`;
-}
-
-function sunriseSunsetBadges(w) {
-  return `<div class="info-item has-text-centered">
-            <div class="info-icon">${icons.sunrise}</div>
-            <div class="info-time">${format.timeGenerator(w.sunriseTime)}</div>
-          </div>
-          <div class="info-item has-text-centered">
-            <div class="info-icon">${icons.sunset}</div>
-            <div class="info-time">${format.timeGenerator(w.sunsetTime)}</div>
-          </div>`;
-}
-
-function uvIndexBadge(w) {
-  return `<div class="info-item has-text-centered">
+const badges = {
+  openHtml: `<div class="info-item has-text-centered">`,
+  closeHtml: `</div>`,
+  temp: (w, u) => {
+    return `${badges.openHtml}
+      <div class="info-icon">${icons.thermometerQuarter}</div>
+      <div class="info-time">${w.temperatureMin} ${u.temp}</div>
+    ${badges.closeHtml} 
+    ${badges.openHtml}
+      <div class="info-icon">${icons.thermometerFull}</div>
+      <div class="info-time">${w.temperatureMax} ${u.temp}</div>
+    ${badges.closeHtml}`;
+  },
+  sunriseSunset: (w) => {
+    return `${badges.openHtml}
+       <div class="info-icon">${icons.sunrise}</div>
+       <div class="info-time">${format.timeGenerator(w.sunriseTime)}</div>
+    ${badges.closeHtml}
+    ${badges.openHtml}
+      <div class="info-icon">${icons.sunset}</div>
+      <div class="info-time">${format.timeGenerator(w.sunsetTime)}</div>
+    ${badges.closeHtml}`;
+  },
+  uvIndex: (w) => {
+    return `${badges.openHtml}
             <div class="info-icon">${icons.sun}</div>
             <div class="info-time">${w.uvIndex}</div>
-          </div>`
-}
-
-function windSpeedGustBearingBadges(w, u) {
-  return `<div class="info-item has-text-centered">
+            ${badges.closeHtml}`;
+  },
+  windSpeedGustBearing: (w, u) => {
+    return `${badges.openHtml}
             <div class="info-icon">${icons.wind}</div>
             <div class="info-time">${w.windSpeed} ${u.windSpeed}</div>
-          </div>
-          <div class="info-item has-text-centered">
+          ${badges.closeHtml}
+          ${badges.openHtml}
             <div class="info-icon">${icons.windGust}</div>
             <div class="info-time">${w.windGust} ${u.windSpeed}</div>
-          </div>
-          <div class="info-item has-text-centered">
+          ${badges.closeHtml}
+          ${badges.openHtml}
             <div class="info-icon" style="transform:rotate(${w.windBearing}deg)">${icons.compass}</div>
             <div class="info-time">${degToCompass(w.windBearing)}</div>
-          </div>`
-}
-function pressureBadge(w, u) {
-  return `<div class="info-item has-text-centered">
+          ${badges.closeHtml}`
+  },
+  cloudCoverRainChance: (w) => {
+    return `${badges.openHtml}
+            <div class="info-icon">${icons.cloudCover}</div>
+            <div class="info-time">${format.asPercentageText(w.cloudCover)}</div>
+          ${badges.closeHtml}
+          ${badges.openHtml}
+            <div class="info-icon">${icons.rainChance}</div>
+            <div class="info-time">${format.asPercentageText(w.precipProbability)}</div>
+          ${badges.closeHtml}`;
+  },
+  pressure: (w, u) => {
+    return `${badges.openHtml}
             <div class="info-icon">${icons.pressure}</div>
             <div class="info-time">${w.pressure.toFixed()} ${u.pressure}</div>
-          </div>`;
-}
-
-function humidityBadge(w) {
-  return `<div class="info-item has-text-centered">
+          ${badges.closeHtml}`;
+  },
+  humidity: (w) => {
+    return `${badges.openHtml}
             <div class="info-icon">${icons.humidity}</div>
             <div class="info-time">${format.asPercentageText(w.humidity)}</div>
-          </div>`;
-}
+          ${badges.closeHtml}`;
+  }
+};
 
 const format = {
-  timeGenerator: function (date) {
+  timeGenerator: (date) => {
     let d = new Date(date * 1000);
     return `${format.hourMinFormatter(d.getHours())}:${format.hourMinFormatter(d.getMinutes())}`;
   },
