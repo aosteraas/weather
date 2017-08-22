@@ -16,6 +16,7 @@ const rainChance = '<svg width="45" height="45" viewBox="0 0 45 45" xmlns="http:
 const wind = '<svg width="44" height="28" viewBox="0 0 44 28" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M38 16h-3c-1.106 0-2-.895-2-2 0-1.103.894-2 2-2h3c1.103 0 2-.895 2-1.998 0-1.105-.897-2-2-2-1.106 0-2-.896-2-2s.894-2 2-2c.136 0 .27.014.4.04 3.122.212 5.597 2.784 5.597 5.96C43.997 13.314 41.312 16 38 16zm-10-4H6c-1.104 0-2 .897-2 2 0 1.105.896 2 2 2H28c3.313 0 6 2.687 6 6 0 3.176-2.476 5.748-5.597 5.96-.13.026-.265.04-.404.04-1.105 0-2-.896-2-2 0-1.105.895-2 2-2 1.104 0 2-.896 2-2s-.896-2-2-2H6c-3.313 0-6-2.686-6-6 0-3.174 2.476-5.746 5.597-5.958.13-.026.265-.04.402-.04H28c1.104 0 2-.896 2-2s-.896-2-2-2c-1.105 0-2-.895-2-2 0-1.104.895-2 2-2 .138 0 .272.015.403.04C31.523.255 34 2.827 34 6.003c0 3.312-2.687 6-6 6z" fill-rule="nonzero" fill="#000"/></svg>';
 const sun = `<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M45.997 26H42c-1.106 0-2-.896-2-2s.894-2 2-2h3.997c1.105 0 2 .896 2 2s-.894 2-2 2zm-7.855-13.312c-.78.78-2.05.78-2.828 0-.78-.78-.78-2.047 0-2.828l2.828-2.828c.78-.78 2.047-.78 2.828 0 .78.78.78 2.047 0 2.828l-2.828 2.828zm-14.14 23.31c-6.628 0-12-5.372-12-11.998 0-6.627 5.37-12 12-12 6.626 0 11.997 5.373 11.997 12 0 6.626-5.372 11.998-12 11.998zM24 16c-4.42 0-8 3.582-8 8 0 4.417 3.582 8 8 8 4.416 0 7.997-3.583 7.997-8 0-4.418-3.58-8-8-8zm0-7.998c-1.106 0-2-.896-2-2v-4c0-1.103.894-2 2-2 1.103 0 2 .897 2 2v4c0 1.104-.898 2-2 2zM9.86 12.688L7.032 9.86c-.78-.78-.78-2.047 0-2.828.78-.78 2.047-.78 2.828 0l2.828 2.828c.78.78.78 2.047 0 2.828-.78.78-2.047.78-2.828 0zM8.002 24c0 1.104-.896 2-2 2h-4c-1.104 0-2-.896-2-2s.897-2 2-2h4c1.105 0 2 .896 2 2zM9.86 35.312c.78-.78 2.047-.78 2.828 0 .78.78.78 2.048 0 2.828L9.86 40.968c-.78.78-2.047.78-2.828 0-.78-.78-.78-2.047 0-2.828l2.828-2.828zM24 39.998c1.105 0 2 .895 2 2v4c0 1.103-.895 2-2 2-1.104 0-2-.897-2-2v-4c0-1.105.896-2 2-2zm14.142-4.686l2.828 2.828c.78.78.78 2.048 0 2.828-.78.78-2.05.78-2.828 0l-2.828-2.828c-.78-.78-.78-2.047 0-2.828.78-.78 2.046-.78 2.828 0z" fill-rule="nonzero" fill="#000"/></svg>`;
 const compass = `<svg width="28" height="28" viewBox="0 0 28 28" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M14 .002C6.27.002 0 6.27 0 14c0 7.73 6.27 14 14 14s13.998-6.27 13.998-14S21.73.002 14 .002zM14 24C8.478 24 4 19.52 4 14 4 8.48 8.48 4.002 14 4.002c5.52 0 10 4.477 10 9.998 0 5.522-4.48 10-10 10zm-4-10c0 2.21 1.79 4 4 4s4-1.79 4-4-4-8-4-8-4 5.79-4 8zm5 0c0 .553-.448 1-1 1-.553 0-1-.447-1-1 0-.552.447-1 1-1 .552 0 1 .448 1 1z" fill-rule="nonzero" fill="#000"/></svg>`;
+const pressure = `<svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg"><title>Shape</title><path d="M13.014 11.002c-1.107.008-2.008-.884-2.016-1.987-.01-1.107.88-2.007 1.987-2.016.166-.002.324.022.478.06 1.156-.906 2.667-2.086 2.84-2.21.297-.21.64-.235.882.008.24.248.215.623-.01.886-.077.09-1.295 1.622-2.23 2.798.035.143.057.29.058.444.01 1.102-.88 2.008-1.99 2.016zM0 21c0-.553.448-1 1-1h9v-2.525C6.51 16.235 4 12.91 4 9c0-4.962 4.038-9 9-9 4.963 0 9 4.038 9 9 0 3.91-2.51 7.236-6 8.475V20h9c.553 0 1 .447 1 1 0 .553-.447 1-1 1H1c-.552 0-1-.447-1-1zm13-6c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6zm12 9H1c-.552 0-1 .447-1 1 0 .553.448 1 1 1h24c.553 0 1-.447 1-1 0-.553-.447-1-1-1z" fill-rule="nonzero" fill="#030104"/></svg>`;
 
 document.addEventListener('DOMContentLoaded', () => {
   let modal = dqs('.location-check');
@@ -110,11 +111,11 @@ function displayCurrent(currently, todaysForecast, location, units) {
             <div class="column">
               <div class="info-item has-text-centered">
                 <div class="info-icon">${thermometerQuarter}</div>
-                <div class="info-time">${todaysForecast.temperatureMin}${units.temp}</div>
+                <div class="info-time">${todaysForecast.temperatureMin} ${units.temp}</div>
               </div>
               <div class="info-item has-text-centered">
                 <div class="info-icon">${thermometerFull}</div>
-                <div class="info-time">${todaysForecast.temperatureMax}${units.temp}</div>
+                <div class="info-time">${todaysForecast.temperatureMax} ${units.temp}</div>
               </div>
               <div class="info-item has-text-centered">
                 <div class="info-icon">${sunrise}</div>
@@ -138,11 +139,15 @@ function displayCurrent(currently, todaysForecast, location, units) {
               </div>
               <div class="info-item has-text-centered">
                 <div class="info-icon">${wind}</div>
-                <div class="info-time">${todaysForecast.windSpeed}${units.windSpeed}</div>
+                <div class="info-time">${todaysForecast.windSpeed} ${units.windSpeed}</div>
               </div>
               <div class="info-item has-text-centered">
                 <div class="info-icon" style="transform:rotate(${currently.windBearing}deg)">${compass}</div>
                 <div class="info-time">${degToCompass(todaysForecast.windBearing)}</div>
+              </div>
+              <div class="info-item has-text-centered">
+                <div class="info-icon">${pressure}</div>
+                <div class="info-time">${todaysForecast.pressure.toFixed()} ${units.pressure}</div>
               </div>
             </div>
           </div>
@@ -152,7 +157,7 @@ function displayCurrent(currently, todaysForecast, location, units) {
                 <div class="column">
                   Humidity: ${asPercentageText(currently.humidity)}<br>
                   UV Index: ${currently.uvIndex}<br>
-                  Wind Gusts: ${currently.windGust}${units.windSpeed}<br>          
+                  Wind Gusts: ${currently.windGust} ${units.windSpeed}<br>          
                 </div>
               </div> <!--top-->
               <div class="columns">
@@ -192,7 +197,6 @@ function displayForecast(forecast, units) {
   // interesting things
   // humidity
   // moonPhase
-  // pressure
   // uvIndex && uvIndexTime
   // windGust
   forecast.forEach((f) => {
@@ -211,11 +215,11 @@ function displayForecast(forecast, units) {
                          <div class="column">
                            <div class="info-item has-text-centered">
                              <div class="info-icon">${thermometerQuarter}</div>
-                             <div class="info-time">${f.temperatureMin}${units.temp}</div>
+                             <div class="info-time">${f.temperatureMin} ${units.temp}</div>
                            </div>
                            <div class="info-item has-text-centered">
                              <div class="info-icon">${thermometerFull}</div>
-                             <div class="info-time">${f.temperatureMax}${units.temp}</div>
+                             <div class="info-time">${f.temperatureMax} ${units.temp}</div>
                            </div>
                            <div class="info-item has-text-centered">
                               <div class="info-icon">${sunrise}</div>
@@ -224,6 +228,10 @@ function displayForecast(forecast, units) {
                            <div class="info-item has-text-centered">
                               <div class="info-icon">${sunset}</div>
                               <div class="info-time">${timeGenerator(f.sunsetTime)}</div>
+                           </div>
+                           <div class="info-item has-text-centered">
+                             <div class="info-icon">${sun}</div>
+                             <div class="info-time">${f.uvIndex}</div>
                            </div>
                            <div class="info-item has-text-centered">
                               <div class="info-icon">${cloudCover}</div>
@@ -241,6 +249,10 @@ function displayForecast(forecast, units) {
                               <div class="info-icon" style="transform:rotate(${f.windBearing}deg)">${compass}</div>
                               <div class="info-time">${degToCompass(f.windBearing)}</div>
                            </div>
+                           <div class="info-item has-text-centered">
+                             <div class="info-icon">${pressure}</div>
+                             <div class="info-time">${f.pressure} ${units.pressure}</div>
+                            </div>
                          </div>
                          </div>
                        </div>
@@ -296,7 +308,8 @@ function unitMapper(units) {
   let fmtUnits = {
     temp: 'ºC',
     dist: 'Km',
-    windSpeed: 'm/s'
+    windSpeed: 'm/s',
+    pressure: 'hPa'
   };
   if (units === "ca") {
     fmtUnits.windSpeed = 'Km/h';
