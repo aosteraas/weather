@@ -104,7 +104,7 @@ function displayCurrent(currently, todaysForecast, location, units) {
           <div class="columns">
             <div class="column has-text-centered">
               <h4 class="title is-4">${location.suburb}, ${location.state}, ${location.country}</h4>
-              <p class="subtitle">${currently.temperature}${units.temp} - ${dateGenerator(currently.time)}</p>
+              <p class="subtitle">${currently.temperature}${units.temp} - ${format.dateGenerator(currently.time)}</p>
               <p><strong>${currently.summary}</strong> - ${todaysForecast.summary}</p>        
             </div>
           </div>
@@ -157,7 +157,7 @@ function displayForecast(forecast, units) {
                      <div class="column">
                        <div class="columns">
                          <div class="column">
-                           <p><strong>${dayGenerator(f.time)}: </strong>${f.summary}</p>
+                           <p><strong>${format.dayGenerator(f.time)}: </strong>${f.summary}</p>
                          </div>
                        </div>
                        <div class="columns">
@@ -180,12 +180,7 @@ function displayForecast(forecast, units) {
   dqs('.forecast').innerHTML = forecastHtml.join('');
 }
 
-function timeGenerator(date) {
-  let d = new Date(date * 1000);
-  let h = hourMinFormatter(d.getHours());
-  let m = hourMinFormatter(d.getMinutes());
-  return `${h}:${m}`;
-}
+
 function temperatureBadges(w, u) {
   return `<div class="info-item has-text-centered">
             <div class="info-icon">${icons.thermometerQuarter}</div>
@@ -196,31 +191,26 @@ function temperatureBadges(w, u) {
             <div class="info-time">${w.temperatureMax} ${u.temp}</div>
           </div>`;
 }
-function humidityBadge(w) {
-  return `<div class="info-item has-text-centered">
-            <div class="info-icon">${icons.humidity}</div>
-            <div class="info-time">${asPercentageText(w.humidity)}</div>
-          </div>`;
-}
+
 function cloudCoverRainChanceBadges(w) {
   return `<div class="info-item has-text-centered">
             <div class="info-icon">${icons.cloudCover}</div>
-            <div class="info-time">${asPercentageText(w.cloudCover)}</div>
+            <div class="info-time">${format.asPercentageText(w.cloudCover)}</div>
           </div>
           <div class="info-item has-text-centered">
             <div class="info-icon">${icons.rainChance}</div>
-            <div class="info-time">${asPercentageText(w.precipProbability)}</div>
+            <div class="info-time">${format.asPercentageText(w.precipProbability)}</div>
           </div>`;
 }
 
 function sunriseSunsetBadges(w) {
   return `<div class="info-item has-text-centered">
             <div class="info-icon">${icons.sunrise}</div>
-            <div class="info-time">${timeGenerator(w.sunriseTime)}</div>
+            <div class="info-time">${format.timeGenerator(w.sunriseTime)}</div>
           </div>
           <div class="info-item has-text-centered">
             <div class="info-icon">${icons.sunset}</div>
-            <div class="info-time">${timeGenerator(w.sunsetTime)}</div>
+            <div class="info-time">${format.timeGenerator(w.sunsetTime)}</div>
           </div>`;
 }
 
@@ -255,28 +245,29 @@ function pressureBadge(w, u) {
 function humidityBadge(w) {
   return `<div class="info-item has-text-centered">
             <div class="info-icon">${icons.humidity}</div>
-            <div class="info-time">${asPercentageText(w.humidity)}</div>
+            <div class="info-time">${format.asPercentageText(w.humidity)}</div>
           </div>`;
 }
 
-function dayGenerator(date) {
-  return days[new Date(date * 1000).getDay()];
-}
-
-
-
-function dateGenerator(time) {
-  let d = new Date(time * 1000);
-  return `${hourMinFormatter(d.getHours())}:${hourMinFormatter(d.getMinutes())} - ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
-}
-
-function hourMinFormatter(time) {
-  return time < 10 ? `0${time}` : time;
-}
-
-function asPercentageText(num) {
-  return `${Math.round(num * 100)}%`;
-}
+const format = {
+  timeGenerator: function (date) {
+    let d = new Date(date * 1000);
+    return `${format.hourMinFormatter(d.getHours())}:${format.hourMinFormatter(d.getMinutes())}`;
+  },
+  dayGenerator: (date) => {
+    return days[new Date(date * 1000).getDay()];
+  },
+  dateGenerator: (time) => {
+    let d = new Date(time * 1000);
+    return `${format.hourMinFormatter(d.getHours())}:${format.hourMinFormatter(d.getMinutes())} - ${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}`;
+  },
+  hourMinFormatter: (time) => {
+    return time < 10 ? `0${time}` : time;
+  },
+  asPercentageText: (num) => {
+    return `${Math.round(num * 100)}%`;
+  }
+};
 
 function showLocation(loc) {
   let locEl = document.querySelector('.location-details');
