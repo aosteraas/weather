@@ -28,7 +28,6 @@ fn get_json() -> JsonValue {
 
 fn main() {
     rocket::ignite()
-        .mount("/api/json", routes![get_json])
-        .mount("/api/location", routes![location])
+        .mount("/api/", routes![get_json, location])
         .launch();
 }
