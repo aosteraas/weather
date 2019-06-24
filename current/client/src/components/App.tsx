@@ -1,26 +1,18 @@
 import React from 'react';
-import GlobalStyle from './styles/GlobalStyle';
+import styled from 'styled-components/macro';
+
+const AppWrapper = styled.div`
+  height: 100vh;
+  background-color: ${props => props.theme.black};
+`;
 
 const App: React.FC = () => {
   return (
-    <>
-      <GlobalStyle />
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    </>
+    <AppWrapper>
+      <header className="App-header">
+        <p>Weather Goes Here</p>
+      </header>
+    </AppWrapper>
   );
 };
 
