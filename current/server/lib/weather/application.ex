@@ -8,6 +8,10 @@ defmodule Weather.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
+      Plug.Adapters.Cowboy.child_spec(
+        scheme: :http,
+        plug: SimpleServer.Router,
+        options: [port: 5005])
       # Starts a worker by calling: Weather.Worker.start_link(arg)
       # {Weather.Worker, arg}
     ]
