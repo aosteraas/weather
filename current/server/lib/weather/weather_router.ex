@@ -16,9 +16,8 @@ defmodule Weather.Router do
 
     latitude = body["lat"]
     longitude = body["lat"]
-
-    IO.inspect(body)
-    send_resp(conn, 201, "created: #{get_in(body, ["message"])}")
+    body = Weather.Darksky.getWeather(latitude, longitude)
+    send_resp(conn, 200, body)
   end
 
   match _ do
