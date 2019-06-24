@@ -10,7 +10,7 @@ defmodule Weather.Application do
     children = [
       Plug.Adapters.Cowboy.child_spec(
         scheme: :http,
-        plug: SimpleServer.Router,
+        plug: Weather.Router,
         options: [port: 5005])
       # Starts a worker by calling: Weather.Worker.start_link(arg)
       # {Weather.Worker, arg}

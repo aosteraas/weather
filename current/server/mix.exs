@@ -22,8 +22,8 @@ defmodule Weather.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:cowboy, "~> 2.6.3"},
-      {:plug, "~> 1.7"},
+      {:plug_cowboy, "~> 2.0"},
+      {:plug, "~> 1.8"},
       {:poison, "~> 4.0"}
     ]
   end
