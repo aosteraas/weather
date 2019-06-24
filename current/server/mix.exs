@@ -14,7 +14,7 @@ defmodule Weather.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :cowboy, :plug, :poison],
       mod: {Weather.Application, []}
     ]
   end
