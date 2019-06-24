@@ -7,6 +7,7 @@ html {
 }
 body {
   font-size: 1.6rem;
+  color: #fff;
 }
 @font-face {
   font-family: system;
