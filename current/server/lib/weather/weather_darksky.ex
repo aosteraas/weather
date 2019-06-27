@@ -1,6 +1,8 @@
 defmodule Weather.Darksky do
   use HTTPoison.Base
   @api_base "https://api.darksky.net/forecast"
+  @exclusions "exclude=[minutely,flags]"
+  @units "units=auto"
 
   def get_weather(coordinates) do
     url = create_url(coordinates)
@@ -23,6 +25,6 @@ defmodule Weather.Darksky do
   defp create_url(coordinates) do
     key = Application.fetch_env!(:weather, :api_key)
 
-    "#{@api_base}/#{key}/#{coordinates.latitude},#{coordinates.longitude}?exclude=[minutely,flags]"
+    "#{@api_base}/#{key}/#{coordinates.latitude},#{coordinates.longitude}?#{@exclusions}&#{@units}"
   end
 end
