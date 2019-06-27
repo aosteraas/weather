@@ -2,7 +2,7 @@ import { Coordinates } from './';
 
 interface UseLocalStorage {
   saveLocation(coordinates: Coordinates): void;
-  restoreLocation(): Coordinates | null;
+  restoreLocation(): Coordinates;
 }
 
 export function useLocalStorage(): UseLocalStorage {
@@ -17,7 +17,7 @@ export function useLocalStorage(): UseLocalStorage {
     if (coords) {
       return JSON.parse(coords);
     }
-    return null;
+    return { latitude: null, longitude: null };
   };
 
   return { saveLocation, restoreLocation };
