@@ -12,6 +12,9 @@ defmodule Weather.Darksky do
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         %{body: "Not Found", status_code: 404}
 
+      {:ok, %HTTPoison.Response{status_code: 400}} ->
+        %{body: "Poorly fomatted request", status_code: 400}
+
       {:error, %HTTPoison.Error{reason: reason}} ->
         %{body: reason, status_code: 500}
     end
@@ -19,6 +22,7 @@ defmodule Weather.Darksky do
 
   defp create_url(coordinates) do
     key = Application.fetch_env!(:weather, :api_key)
-    "#{@api_base}/#{key}/#{coordinates.lat},#{coordinates.lon}?exclude=[minutely,flags]"
+
+    "#{@api_base}/#{key}/#{coordinates.latitude},#{coordinates.longitude}?exclude=[minutely,flags]"
   end
 end
