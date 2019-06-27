@@ -1,4 +1,5 @@
 defmodule Weather.Router do
+  alias Weather.Coordinates
   use Plug.Router
   use Plug.Debugger
   require Logger
@@ -12,12 +13,12 @@ defmodule Weather.Router do
 
   post "/post" do
     {:ok, body, conn} = read_body(conn)
-    body = Poison.decode!(body)
 
-    latitude = body["lat"]
-    longitude = body["lat"]
-    body = Weather.Darksky.getWeather(latitude, longitude)
-    send_resp(conn, 200, body)
+    result =
+      Poison.decode!(body, as: %Coordinates{})
+      |> Weather.Darksky.get_weather()
+
+    send_resp(conn, result.status_code, result.body)
   end
 
   match _ do
