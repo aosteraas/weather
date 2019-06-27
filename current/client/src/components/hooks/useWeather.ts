@@ -6,7 +6,7 @@ interface Position {
   timestamp: number;
 }
 
-interface Coordinates {
+export interface Coordinates {
   latitude: number;
   longitude: number;
 }
@@ -36,8 +36,7 @@ export function useWeather(): UseWeather {
     const response = await fetch('/post', { method: 'POST', body: JSON.stringify(coordinates) });
     if (response.ok) {
       const data = await response.json();
-      console.log('woprks');
-      console.log(data);
+
       setWeather(data);
     } else {
       setError(true);
