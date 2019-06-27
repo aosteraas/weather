@@ -18,7 +18,9 @@ defmodule Weather.Router do
       Poison.decode!(body, as: %Coordinates{})
       |> Weather.Darksky.get_weather()
 
-    send_resp(conn, result.status_code, result.body)
+    conn
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(result.status_code, result.body)
   end
 
   match _ do
