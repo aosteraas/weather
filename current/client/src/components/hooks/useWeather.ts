@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from './';
-
+import { defaultWeather } from './defaultWeather';
 interface Position {
   coords: Coordinates;
   timestamp: number;
@@ -19,24 +19,22 @@ interface UseWeather {
 }
 
 export function useWeather(): UseWeather {
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState(defaultWeather);
   const [error, setError] = useState(false);
   const { saveLocation, restoreLocation } = useLocalStorage();
 
-  const savedLocation = restoreLocation();
+  // const savedLocation = restoreLocation();
 
-  useEffect(() => {
-    if (savedLocation.latitude && savedLocation.longitude) {
-      getWeather(savedLocation);
-    }
-  }, [savedLocation.latitude, savedLocation.longitude]);
+  // useEffect(() => {
+  //   if (savedLocation.latitude && savedLocation.longitude) {
+  //     getWeather(savedLocation);
+  //   }
+  // }, [savedLocation.latitude, savedLocation.longitude]);
 
   const getWeather = async (coordinates: Coordinates) => {
-    //
     const response = await fetch('/post', { method: 'POST', body: JSON.stringify(coordinates) });
     if (response.ok) {
       const data = await response.json();
-
       setWeather(data);
     } else {
       setError(true);
