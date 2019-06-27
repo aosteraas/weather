@@ -32,7 +32,11 @@ export function useWeather(): UseWeather {
   // }, [savedLocation.latitude, savedLocation.longitude]);
 
   const getWeather = async (coordinates: Coordinates) => {
-    const response = await fetch('/post', { method: 'POST', body: JSON.stringify(coordinates) });
+    const response = await fetch('/post', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(coordinates)
+    });
     if (response.ok) {
       const data = await response.json();
       setWeather(data);
