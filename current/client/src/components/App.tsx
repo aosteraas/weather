@@ -1,11 +1,19 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { WiDaySunny } from 'weather-icons-react';
-
+import { useWeather } from './hooks';
+import { Currently } from './Currently';
 const AppWrapper = styled.div`
   height: 100vh;
   background-color: ${props => props.theme.black};
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+  }
 `;
+
 const Main = styled.main`
   display: flex;
   justify-content: center;
@@ -18,24 +26,23 @@ const Button = styled.button`
   background-color: ${p => p.theme.white};
   padding: 1rem;
 `;
-const lat = -37.7692497;
-const lon = 144.9506981;
-const location = { lat, lon };
 
 const App: React.FC = () => {
-  const getWeather = async () => {
-    //
-  };
+  const { getWeather, getLocation, weather, error } = useWeather();
 
   return (
     <AppWrapper>
-      <header className="App-header">
-        <WiDaySunny size={24} color="#FFF" />{' '}
+      <header>
+        <WiDaySunny size={24} color="#FFF" /> <span>Weather</span>
       </header>
       <Main>
-        <div>
-          <Button onClick={() => getWeather()}>Make things happen</Button>
-        </div>
+        {weather ? (
+          <Currently currently={weather.currently} />
+        ) : (
+          <div>
+            <Button onClick={getLocation}>Make things happen</Button>
+          </div>
+        )}
       </Main>
     </AppWrapper>
   );
