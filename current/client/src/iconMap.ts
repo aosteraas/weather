@@ -12,7 +12,8 @@ import {
   WiHumidity,
   WiThermometer,
   WiWindy,
-  WiCloudy
+  WiCloudy,
+  WiGaleWarning
 } from 'weather-icons-react';
 
 interface IconMap {
@@ -33,7 +34,8 @@ const altIconMap: IconMap = {
   humidity: WiHumidity,
   thermometer: WiThermometer,
   windspeed: WiStrongWind,
-  cloudcover: WiCloudy
+  cloudcover: WiCloudy,
+  windGust: WiGaleWarning
 };
 
 export const getIcon = (icon: string) => {
