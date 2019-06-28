@@ -1,4 +1,23 @@
-const si = {
+interface UnitMap {
+  [key: string]: Units;
+}
+
+interface Units {
+  nearestStormDistance: string;
+  precipIntensity: string;
+  precipIntensityMax: string;
+  precipAccumulation: string;
+  temperature: string;
+  temperatureMin: string;
+  temperatureMax: string;
+  apparentTemperature: string;
+  dewPoint: string;
+  windSpeed: string;
+  windGust: string;
+  pressure: string;
+  visibility: string;
+}
+const si: Units = {
   nearestStormDistance: 'Km',
   precipIntensity: 'ml/h.',
   precipIntensityMax: 'ml/h',
@@ -14,7 +33,7 @@ const si = {
   visibility: 'mph'
 };
 
-const us = {
+const us: Units = {
   nearestStormDistance: 'mi',
   precipIntensity: 'in/h.',
   precipIntensityMax: 'in/h',
@@ -30,7 +49,7 @@ const us = {
   visibility: 'mi'
 };
 
-export const units = {
+const units: UnitMap = {
   si: { ...si },
   ca: {
     ...si,
@@ -45,4 +64,8 @@ export const units = {
     windGust: 'mph'
   },
   us: { ...us }
+};
+
+export const getUnits = (key: string | number): Units => {
+  return units[key];
 };
