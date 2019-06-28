@@ -1,48 +1,14 @@
 import React from 'react';
-import styled from 'styled-components/macro';
+import { CurrentStyles, Summary, Overview, Data, Overviews } from './styles';
 import { getIcon } from '../iconMap';
 import { getUnits } from './units';
-const CurrentWrapper = styled.section`
-  display: flex;
-`;
 
-const Summary = styled.div`
-  min-height: 14rem;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid white;
-  padding-right: 1.5rem;
-  svg {
-    width: 100%;
-    height: 100%;
-    max-height: 14rem;
-  }
-  p {
-    font-size: 2rem;
-    text-align: center;
-  }
-`;
-const Overview = styled.div`
-  display: flex;
-  align-items: center;
-
-  border: 1px solid ${p => p.theme.white};
-  svg {
-    height: 2.5rem;
-    width: 2.5rem;
-  }
-`;
-const Data = styled.div`
-  flex: 1;
-  height: 2.5rem;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: right;
-  color: ${p => p.theme.black};
-  background: ${p => p.theme.white};
-`;
+const ThermIcon = getIcon('thermometer');
+const HumidIcon = getIcon('humidity');
+const WindIcon = getIcon('windspeed');
+const CloudCoverIcon = getIcon('cloudcover');
+const GustIcon = getIcon('windGust');
+const PressureIcon = getIcon('pressure');
 export const Currently: React.FC<Props> = ({ currently, units }) => {
   const formatTime = (time: number): string => {
     return new Date(time * 1000).toLocaleTimeString();
@@ -53,21 +19,17 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
   };
   const _units = getUnits(units);
   const Icon = getIcon(currently.icon);
-  const ThermIcon = getIcon('thermometer');
-  const HumidIcon = getIcon('humidity');
-  const WindIcon = getIcon('windspeed');
-  const CloudCoverIcon = getIcon('cloudcover');
-  const GustIcon = getIcon('windGust');
+
   return (
-    <CurrentWrapper>
+    <CurrentStyles>
       <Summary>
-        <p>{currently.summary}</p>
+        <p>Weather at {formatTime(currently.time)}</p>
         <div>
           <Icon />
-          <p>Weather at {formatTime(currently.time)}</p>
         </div>
+        <p>{currently.summary}</p>
       </Summary>
-      <div>
+      <Overviews>
         <Overview>
           <ThermIcon />
           <Data>
@@ -95,8 +57,14 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
           <CloudCoverIcon />
           <Data>{formatPercent(currently.cloudCover)}</Data>
         </Overview>
-      </div>
-    </CurrentWrapper>
+        <Overview>
+          <PressureIcon />
+          <Data>
+            {currently.pressure} {_units.pressure}
+          </Data>
+        </Overview>
+      </Overviews>
+    </CurrentStyles>
   );
 };
 
