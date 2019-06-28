@@ -1342,5 +1342,10 @@ export const defaultWeather = {
       }
     ]
   },
+  flags: {
+    sources: ['cmc', 'gfs', 'icon', 'isd', 'madis'],
+    'nearest-station': 5.433,
+    units: 'si'
+  },
   offset: 10
 };
