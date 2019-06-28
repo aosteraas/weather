@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { getIcon } from '../iconMap';
-
+import { units } from './units';
 const CurrentWrapper = styled.section`
   display: flex;
 `;
@@ -40,7 +40,7 @@ export const Currently: React.FC<Props> = ({ currently }) => {
   const formatPercent = (value: number): string => {
     return `${value * 100}%`;
   };
-
+  console.log(Object.keys(currently.temperature));
   const Icon = getIcon(currently.icon);
   const ThermIcon = getIcon('thermometer');
   const HumidIcon = getIcon('humidity');
@@ -58,7 +58,9 @@ export const Currently: React.FC<Props> = ({ currently }) => {
       <div>
         <Overview>
           <ThermIcon />
-          <div>{currently.temperature}</div>
+          <div>
+            {currently.temperature} {units.si.temperature}
+          </div>
         </Overview>
         <Overview>
           <HumidIcon />
@@ -67,7 +69,9 @@ export const Currently: React.FC<Props> = ({ currently }) => {
         <Overview>
           <WindIcon /> <div>{currently.windSpeed}</div>
         </Overview>
-        <Overview>{currently.windGust} windGust</Overview>
+        <Overview>
+          {currently.windGust} {units.si.windGust}
+        </Overview>
         <Overview>
           <CloudCoverIcon />
           <div>{formatPercent(currently.cloudCover)}</div>
