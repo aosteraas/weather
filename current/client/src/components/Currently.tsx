@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 import { getIcon } from '../iconMap';
-import { units } from './units';
+import { getUnits } from './units';
 const CurrentWrapper = styled.section`
   display: flex;
 `;
@@ -13,7 +13,6 @@ const Summary = styled.div`
   flex-direction: column;
   border-right: 1px solid white;
   padding-right: 1.5rem;
-  margin-right: 1.5rem;
   svg {
     width: 100%;
     height: 100%;
@@ -27,12 +26,24 @@ const Summary = styled.div`
 const Overview = styled.div`
   display: flex;
   align-items: center;
+
+  border: 1px solid ${p => p.theme.white};
   svg {
     height: 2.5rem;
     width: 2.5rem;
   }
 `;
-export const Currently: React.FC<Props> = ({ currently }) => {
+const Data = styled.div`
+  flex: 1;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: right;
+  color: ${p => p.theme.black};
+  background: ${p => p.theme.white};
+`;
+export const Currently: React.FC<Props> = ({ currently, units }) => {
   const formatTime = (time: number): string => {
     return new Date(time * 1000).toLocaleTimeString();
   };
@@ -40,12 +51,13 @@ export const Currently: React.FC<Props> = ({ currently }) => {
   const formatPercent = (value: number): string => {
     return `${value * 100}%`;
   };
-  console.log(Object.keys(currently.temperature));
+  const _units = getUnits(units);
   const Icon = getIcon(currently.icon);
   const ThermIcon = getIcon('thermometer');
   const HumidIcon = getIcon('humidity');
   const WindIcon = getIcon('windspeed');
   const CloudCoverIcon = getIcon('cloudcover');
+  const GustIcon = getIcon('windGust');
   return (
     <CurrentWrapper>
       <Summary>
@@ -58,23 +70,30 @@ export const Currently: React.FC<Props> = ({ currently }) => {
       <div>
         <Overview>
           <ThermIcon />
-          <div>
-            {currently.temperature} {units.si.temperature}
-          </div>
+          <Data>
+            {currently.temperature} {_units.temperature}
+          </Data>
         </Overview>
         <Overview>
           <HumidIcon />
-          <div>{formatPercent(currently.humidity)}</div>
+          <Data>{formatPercent(currently.humidity)}</Data>
         </Overview>
         <Overview>
-          <WindIcon /> <div>{currently.windSpeed}</div>
+          <WindIcon />
+          <Data>
+            {currently.windSpeed}
+            {_units.windSpeed}
+          </Data>
         </Overview>
         <Overview>
-          {currently.windGust} {units.si.windGust}
+          <GustIcon />
+          <Data>
+            {currently.windGust} {_units.windGust}
+          </Data>
         </Overview>
         <Overview>
           <CloudCoverIcon />
-          <div>{formatPercent(currently.cloudCover)}</div>
+          <Data>{formatPercent(currently.cloudCover)}</Data>
         </Overview>
       </div>
     </CurrentWrapper>
