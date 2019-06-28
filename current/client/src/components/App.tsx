@@ -3,23 +3,7 @@ import styled from 'styled-components/macro';
 import { WiDaySunny } from 'weather-icons-react';
 import { useWeather } from './hooks';
 import { Currently } from './Currently';
-const AppWrapper = styled.div`
-  height: 100vh;
-  background-color: ${props => props.theme.black};
-  header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-  }
-`;
-
-const Main = styled.main`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-`;
+import { AppStyle, Main } from './styles';
 
 const Button = styled.button`
   color: ${p => p.theme.black};
@@ -31,7 +15,7 @@ const App: React.FC = () => {
   const { getWeather, getLocation, weather, error } = useWeather();
 
   return (
-    <AppWrapper>
+    <AppStyle>
       <header>
         <WiDaySunny size={24} color="#FFF" /> <span>Weather</span>
       </header>
@@ -44,7 +28,7 @@ const App: React.FC = () => {
           </div>
         )}
       </Main>
-    </AppWrapper>
+    </AppStyle>
   );
 };
 
