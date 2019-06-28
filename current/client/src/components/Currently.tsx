@@ -83,6 +83,7 @@ export const Currently: React.FC<Props> = ({ currently }) => {
 
 interface Props {
   currently: CurrentlyProps;
+  units: string;
 }
 
 interface CurrentlyProps {

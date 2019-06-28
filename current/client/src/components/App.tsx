@@ -21,7 +21,7 @@ const App: React.FC = () => {
       </header>
       <Main>
         {weather ? (
-          <Currently currently={weather.currently} />
+          <Currently units={weather.flags.units} currently={weather.currently} />
         ) : (
           <div>
             <Button onClick={getLocation}>Make things happen</Button>
