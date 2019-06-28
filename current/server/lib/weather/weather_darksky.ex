@@ -1,7 +1,7 @@
 defmodule Weather.Darksky do
   use HTTPoison.Base
   @api_base "https://api.darksky.net/forecast"
-  @exclusions "exclude=[minutely,flags]"
+  @exclusions "exclude=[minutely]"
   @units "units=auto"
 
   def get_weather(coordinates) do
