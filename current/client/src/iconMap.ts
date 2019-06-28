@@ -15,27 +15,31 @@ import {
   WiCloudy
 } from 'weather-icons-react';
 
-export const iconMap = [
-  { icon: 'clear-day', Component: WiDaySunny },
-  { icon: 'clear-night', Component: WiNightClear },
-  { icon: 'rain', Component: WiRainMix },
-  { icon: 'snow', Component: WiSnow },
-  { icon: 'sleet', Component: WiSleet },
-  { icon: 'wind', Component: WiWindy },
-  { icon: 'fog', Component: WiFog },
-  { icon: 'cloudy', Component: WiCloud },
-  { icon: 'partly-cloudy-day', Component: WiDayCloudy },
-  { icon: 'partly-cloudy-night', Component: WiNightAltPartlyCloudy },
-  { icon: 'humidity', Component: WiHumidity },
-  { icon: 'thermometer', Component: WiThermometer },
-  { icon: 'windspeed', Component: WiStrongWind },
-  { icon: 'cloudcover', Component: WiCloudy }
-];
+interface IconMap {
+  [key: string]: any;
+}
+
+const altIconMap: IconMap = {
+  'clear-day': WiDaySunny,
+  'clear-night': WiNightClear,
+  rain: WiRainMix,
+  snow: WiSnow,
+  sleet: WiSleet,
+  wind: WiWindy,
+  fog: WiFog,
+  cloudy: WiCloud,
+  'partly-cloudy-day': WiDayCloudy,
+  'partly-cloudy-night': WiNightAltPartlyCloudy,
+  humidity: WiHumidity,
+  thermometer: WiThermometer,
+  windspeed: WiStrongWind,
+  cloudcover: WiCloudy
+};
 
 export const getIcon = (icon: string) => {
-  const iconable = iconMap.find(x => x.icon === icon);
-  if (iconable) {
-    return iconable.Component;
+  const _icon = altIconMap[icon];
+  if (!_icon) {
+    return WiCloud;
   }
-  return WiCloud;
+  return _icon;
 };

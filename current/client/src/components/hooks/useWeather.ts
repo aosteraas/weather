@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocalStorage } from './';
 import { defaultWeather } from './defaultWeather';
+
 interface Position {
   coords: Coordinates;
   timestamp: number;
