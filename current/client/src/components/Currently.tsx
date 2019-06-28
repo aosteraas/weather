@@ -1,6 +1,7 @@
 import React from 'react';
 import { CurrentStyles, Summary, Overview, Data, Overviews } from './styles';
 import { getIcon } from '../iconMap';
+import { Currently as CurrentlyProps } from '../types';
 import { getUnits } from './units';
 
 const ThermIcon = getIcon('thermometer');
@@ -71,26 +72,4 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
 interface Props {
   currently: CurrentlyProps;
   units: string;
-}
-
-interface CurrentlyProps {
-  time: number;
-  summary: string;
-  icon: string;
-  nearestStormDistance: number;
-  nearestStormBearing: number;
-  precipIntensity: number;
-  precipProbability: number;
-  temperature: number;
-  apparentTemperature: number;
-  dewPoint: number;
-  humidity: number;
-  pressure: number;
-  windSpeed: number;
-  windGust: number;
-  windBearing: number;
-  cloudCover: number;
-  uvIndex: number;
-  visibility: number;
-  ozone: number;
 }
