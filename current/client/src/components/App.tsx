@@ -13,7 +13,7 @@ const Button = styled.button`
 
 const App: React.FC = () => {
   const { getWeather, getLocation, weather, error } = useWeather();
-
+  const { flags, currently } = weather;
   return (
     <AppStyle>
       <header>
@@ -21,7 +21,7 @@ const App: React.FC = () => {
       </header>
       <Main>
         {weather ? (
-          <Currently units={weather.flags.units} currently={weather.currently} />
+          <Currently units={flags.units} currently={currently} />
         ) : (
           <div>
             <Button onClick={getLocation}>Make things happen</Button>
