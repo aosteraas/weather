@@ -1,3 +1,9 @@
+interface Base {
+  summary: string;
+  icon: string;
+  time: number;
+}
+
 export interface Hourly extends Base {
   data: HourlyData[];
 }
@@ -5,15 +11,7 @@ export interface Daily extends Base {
   data: DailyData[];
 }
 
-interface Base {
-  summary: string;
-  icon: string;
-}
-
-export interface Currently {
-  time: number;
-  summary: string;
-  icon: string;
+export interface Currently extends Base {
   nearestStormDistance: number;
   nearestStormBearing: number;
   precipIntensity: number;
@@ -32,10 +30,7 @@ export interface Currently {
   ozone: number;
 }
 
-interface BaseData {
-  icon: string;
-  time: number;
-  summary: string;
+interface BaseData extends Base {
   precipIntensity: number;
   precipProbability: number;
   windSpeed: number;
