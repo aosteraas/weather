@@ -3,21 +3,16 @@ import { CurrentStyles, Summary, Overview, Data, Overviews } from './styles';
 import { getIcon } from '../iconMap';
 import { Currently as CurrentlyProps } from '../types';
 import { getUnits } from './units';
-
+import { formatTime, formatPercent } from '../formatter';
+// TODO make icon generation less bad
 const ThermIcon = getIcon('thermometer');
 const HumidIcon = getIcon('humidity');
 const WindIcon = getIcon('windspeed');
 const CloudCoverIcon = getIcon('cloudcover');
 const GustIcon = getIcon('windGust');
 const PressureIcon = getIcon('pressure');
-export const Currently: React.FC<Props> = ({ currently, units }) => {
-  const formatTime = (time: number): string => {
-    return new Date(time * 1000).toLocaleTimeString();
-  };
 
-  const formatPercent = (value: number): string => {
-    return `${value * 100}%`;
-  };
+export const Currently: React.FC<Props> = ({ currently, units }) => {
   const _units = getUnits(units);
   const Icon = getIcon(currently.icon);
 

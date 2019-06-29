@@ -4,6 +4,8 @@ const CurrentStyles = styled.section`
   display: flex;
   flex-direction: column;
   max-width: 27rem;
+  min-width: 27rem;
+  margin-right: 1rem;
 `;
 const Summary = styled.div`
   min-height: 14rem;

@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { WiDaySunny } from 'weather-icons-react';
 import { useWeather } from './hooks';
 import { Currently } from './Currently';
+import { Daily } from './Daily';
 import { AppStyle, Main } from './styles';
 
 const Button = styled.button`
@@ -13,7 +14,8 @@ const Button = styled.button`
 
 const App: React.FC = () => {
   const { getWeather, getLocation, weather, error } = useWeather();
-  const { flags, currently } = weather;
+  const { flags, currently, daily } = weather;
+
   return (
     <AppStyle>
       <header>
@@ -21,7 +23,10 @@ const App: React.FC = () => {
       </header>
       <Main>
         {weather ? (
-          <Currently units={flags.units} currently={currently} />
+          <>
+            <Currently units={flags.units} currently={currently} />
+            <Daily units={flags.units} daily={daily} />
+          </>
         ) : (
           <div>
             <Button onClick={getLocation}>Make things happen</Button>
