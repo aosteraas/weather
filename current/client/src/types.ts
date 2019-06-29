@@ -83,7 +83,7 @@ export interface Flags {
   units: string;
 }
 
-export interface RootObject {
+export interface Root {
   latitude: number;
   longitude: number;
   timezone: string;
