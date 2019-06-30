@@ -5,21 +5,25 @@ defmodule Weather.Darksky do
   @units "units=auto"
 
   def get_weather(coordinates) do
-    url = create_url(coordinates)
+    create_url(coordinates)
+    |> HTTPoison.get()
+    |> handle_response
+  end
 
-    case HTTPoison.get(url) do
-      {:ok, %HTTPoison.Response{body: body, status_code: 200}} ->
-        %{body: body, status_code: 200}
+  defp handle_response({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
+    %{body: body, status_code: 200}
+  end
 
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        %{body: "Not Found", status_code: 404}
+  defp handle_response({:ok, %HTTPoison.Response{status_code: 404}}) do
+    %{body: "Not Found", status_code: 404}
+  end
 
-      {:ok, %HTTPoison.Response{status_code: 400}} ->
-        %{body: "Poorly fomatted request", status_code: 400}
+  defp handle_response({:ok, %HTTPoison.Response{status_code: 400}}) do
+    %{body: "Poorly fomatted request", status_code: 400}
+  end
 
-      {:error, %HTTPoison.Error{reason: reason}} ->
-        %{body: reason, status_code: 500}
-    end
+  defp handle_response({:error, %HTTPoison.Error{reason: reason}}) do
+    %{body: reason, status_code: 500}
   end
 
   defp create_url(coordinates) do
