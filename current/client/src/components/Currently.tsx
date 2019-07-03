@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flex, Box } from 'rebass';
-import { Summary, Overview, Data } from './styles';
+import { Summary, Overview, Data, Label } from './styles';
 import { getIcon } from '../lib/iconMap';
 import { Currently as CurrentlyProps } from '../types';
 import { getUnits } from './units';
@@ -28,16 +28,19 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
       </Summary>
       <Flex flexDirection="row" flexWrap="wrap">
         <Overview>
+          <Label>Temperature</Label>
           <ThermIcon />
           <Data>
             {currently.temperature} {_units.temperature}
           </Data>
         </Overview>
         <Overview>
+          <Label>Humidity</Label>
           <HumidIcon />
           <Data>{formatPercent(currently.humidity)}</Data>
         </Overview>
         <Overview>
+          <Label>Wind Speed</Label>
           <WindIcon />
           <Data>
             {currently.windSpeed}
@@ -45,6 +48,7 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
           </Data>
         </Overview>
         <Overview>
+          <Label>Wind Gust</Label>
           <GustIcon />
           <Data>
             {currently.windGust} {_units.windGust}

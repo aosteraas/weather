@@ -5,8 +5,8 @@ const Summary = styled(Box)`
   min-height: 14rem;
   padding: 3rem;
   height: auto;
-  border: 1px solid #dfdfdf;
-  border-radius: 15px;
+  border: 1px solid #fff;
+  border-radius: 1rem;
 
   svg {
     width: 100%;
@@ -21,10 +21,13 @@ const Summary = styled(Box)`
 
 const Overview = styled(Flex)`
   width: 25rem;
-  /* height: 100px; */
+  flex-direction: column;
   align-items: center;
-  border: 1px solid #dfdfdf;
-  border-radius: 15px;
+  border: 1px solid #fff;
+  border-radius: 1rem;
+  background: #fff;
+  color: ${p => p.theme.colors.lightBlue};
+  margin: 1rem;
   svg {
     height: 3rem;
     width: 3rem;
@@ -40,4 +43,9 @@ const Data = styled.div`
   padding-right: 1rem;
 `;
 
-export { Summary, Overview, Data };
+const Label = styled.div`
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+`;
+export { Summary, Overview, Data, Label };
