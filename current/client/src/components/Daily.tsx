@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import { Daily as DailyProps } from '../types';
 import { getUnits } from './units';
-import { getIcon } from '../iconMap';
-import { formatTime, formatPercent } from '../formatter';
+import { getIcon } from '../lib/iconMap';
+import { formatTime, formatPercent } from '../lib/formatter';
 
 const ThermIcon = getIcon('thermometer');
 const PressureIcon = getIcon('pressure');

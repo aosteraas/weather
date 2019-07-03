@@ -1,9 +1,9 @@
 import React from 'react';
 import { CurrentStyles, Summary, Overview, Data, Overviews } from './styles';
-import { getIcon } from '../iconMap';
+import { getIcon } from '../lib/iconMap';
 import { Currently as CurrentlyProps } from '../types';
 import { getUnits } from './units';
-import { formatTime, formatPercent } from '../formatter';
+import { formatTime, formatPercent } from '../lib/formatter';
 // TODO make icon generation less bad
 const ThermIcon = getIcon('thermometer');
 const HumidIcon = getIcon('humidity');
