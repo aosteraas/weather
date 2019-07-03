@@ -43,8 +43,8 @@ const Data = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: right;
-  color: ${p => p.theme.white};
-  background: ${p => p.theme.black};
+  color: ${p => p.theme.colors.white};
+  background: ${p => p.theme.colors.black};
   padding-right: 1rem;
 `;
 const Overviews = styled.section`

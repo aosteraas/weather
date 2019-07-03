@@ -7,8 +7,8 @@ import { Daily } from './Daily';
 import { AppStyle, Main } from './styles';
 
 const Button = styled.button`
-  color: ${p => p.theme.black};
-  background-color: ${p => p.theme.white};
+  color: ${p => p.theme.colors.black};
+  background-color: ${p => p.theme.colors.white};
   padding: 1rem;
 `;
 
