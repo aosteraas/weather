@@ -1,18 +1,10 @@
 import styled from 'styled-components/macro';
+import { Flex, Box } from 'rebass';
 
-const CurrentStyles = styled.section`
-  display: flex;
-  flex-direction: column;
-  max-width: 27rem;
-  min-width: 27rem;
-  margin-right: 1rem;
-`;
-const Summary = styled.div`
+const Summary = styled(Box)`
   min-height: 14rem;
   padding: 3rem;
   height: auto;
-  display: flex;
-  flex-direction: column;
   border: 1px solid #dfdfdf;
   svg {
     width: 100%;
@@ -28,7 +20,6 @@ const Summary = styled.div`
 const Overview = styled.div`
   display: flex;
   align-items: center;
-  width: 50%;
   border-bottom: 1px solid #dfdfdf;
   margin-top: 0.5rem;
   svg {
@@ -47,12 +38,10 @@ const Data = styled.div`
   background: ${p => p.theme.colors.black};
   padding-right: 1rem;
 `;
-const Overviews = styled.section`
-  display: flex;
-  flex-wrap: wrap;
+const Overviews = styled(Box)`
   ${Overview}:nth-child(odd) {
     border-right: 1px solid #dfdfdf;
   }
 `;
 
-export { CurrentStyles, Summary, Overview, Data, Overviews };
+export { Summary, Overview, Data, Overviews };

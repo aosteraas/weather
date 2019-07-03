@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { Flex, Box } from 'rebass';
 import { WiDaySunny } from 'weather-icons-react';
 import { useWeather } from './hooks';
 import { Currently } from './Currently';
@@ -23,10 +24,10 @@ const App: React.FC = () => {
       </header>
       <Main>
         {weather ? (
-          <>
+          <Flex flexDirection="column">
             <Currently units={flags.units} currently={currently} />
             <Daily units={flags.units} daily={daily} />
-          </>
+          </Flex>
         ) : (
           <div>
             <Button onClick={getLocation}>Make things happen</Button>

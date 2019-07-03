@@ -1,5 +1,6 @@
 import React from 'react';
-import { CurrentStyles, Summary, Overview, Data, Overviews } from './styles';
+import { Flex, Box } from 'rebass';
+import { Summary, Overview, Data, Overviews } from './styles';
 import { getIcon } from '../lib/iconMap';
 import { Currently as CurrentlyProps } from '../types';
 import { getUnits } from './units';
@@ -17,7 +18,7 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
   const Icon = getIcon(currently.icon);
 
   return (
-    <CurrentStyles>
+    <Flex>
       <Summary>
         <p>Weather at {formatTime(currently.time)}</p>
         <div>
@@ -60,7 +61,7 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
           </Data>
         </Overview>
       </Overviews>
-    </CurrentStyles>
+    </Flex>
   );
 };
 
