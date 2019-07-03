@@ -18,7 +18,7 @@ export const Main = styled.main`
   align-items: center;
   height: 100%;
   background-image: linear-gradient(
-    315deg,
+    180deg,
     ${p => p.theme.colors.blue} 0%,
     ${p => p.theme.colors.lightBlue} 74%
   );

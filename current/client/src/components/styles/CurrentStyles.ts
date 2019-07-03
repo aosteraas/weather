@@ -6,6 +6,8 @@ const Summary = styled(Box)`
   padding: 3rem;
   height: auto;
   border: 1px solid #dfdfdf;
+  border-radius: 15px;
+
   svg {
     width: 100%;
     height: 100%;
@@ -17,14 +19,15 @@ const Summary = styled(Box)`
   }
 `;
 
-const Overview = styled.div`
-  display: flex;
+const Overview = styled(Flex)`
+  width: 25rem;
+  /* height: 100px; */
   align-items: center;
-  border-bottom: 1px solid #dfdfdf;
-  margin-top: 0.5rem;
+  border: 1px solid #dfdfdf;
+  border-radius: 15px;
   svg {
-    height: 2.5rem;
-    width: 2.5rem;
+    height: 3rem;
+    width: 3rem;
   }
 `;
 const Data = styled.div`
@@ -34,14 +37,7 @@ const Data = styled.div`
   justify-content: center;
   flex-direction: column;
   text-align: right;
-  color: ${p => p.theme.colors.white};
-  background: ${p => p.theme.colors.black};
   padding-right: 1rem;
 `;
-const Overviews = styled(Box)`
-  ${Overview}:nth-child(odd) {
-    border-right: 1px solid #dfdfdf;
-  }
-`;
 
-export { Summary, Overview, Data, Overviews };
+export { Summary, Overview, Data };
