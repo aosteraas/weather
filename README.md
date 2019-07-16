@@ -1,10 +1,18 @@
 # Weather
 
-A (yet to be determined) remake of a vanilla JS and Express.js weather app made in mid-late 2017.
+I think weather is _awesome_ and so when I want to play with something new I make a new version of this weather forecast app in those new things.
 
-Itself a remake of a jQuery weather app made in early-mid 2016.
+## Current
 
-The OG jQuery edition can be found in `old-2016`, the not as OG edition in `old-2017`.
+React (feat. TypeScript) front end, and a very simple, probably not idiomatic, Elixir API server.
+
+## 2017
+
+An Express.js app with Handlebars templating, and some plain old JS.
+
+## 2016
+
+The OG version. Built with good old HTML and jQuery.
 
 #### Credits
 
