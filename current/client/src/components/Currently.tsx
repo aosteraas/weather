@@ -28,6 +28,7 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
         alignItems="center"
         justifyContent="center"
       >
+        <Box>{currently.summary}</Box>
         <Box fontSize={6}>
           {currently.temperature}
           {_units.temperature}
