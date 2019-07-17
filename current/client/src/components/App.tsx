@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components/macro';
-import { Flex, Box } from 'rebass';
 import { WiDaySunny } from 'weather-icons-react';
 import { useWeather } from './hooks';
 import { Currently } from './Currently';
-import { Daily } from './Daily';
+import { Forecast } from './Forecast';
 import { AppStyle, Main } from './styles';
 
 const Button = styled.button`
@@ -24,7 +23,10 @@ const App: React.FC = () => {
       </header>
       <Main>
         {weather ? (
-          <Currently units={flags.units} currently={currently} />
+          <>
+            <Currently units={flags.units} currently={currently} />
+            <Forecast units={flags.units} daily={daily} />
+          </>
         ) : (
           <div>
             <Button onClick={getLocation}>Make things happen</Button>

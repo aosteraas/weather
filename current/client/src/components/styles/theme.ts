@@ -5,7 +5,8 @@ export const theme = {
     black: `#282c34`,
     white: `#ffffff`,
     blue: `#2e7efc`,
-    lightBlue: `#5faafc`
+    lightBlue: `#5faafc`,
+    grey: `#dfdfdf`
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   shadows: {
