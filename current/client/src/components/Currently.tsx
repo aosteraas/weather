@@ -1,69 +1,38 @@
 import React from 'react';
+import styled from 'styled-components/macro';
 import { Flex, Box } from 'rebass';
-import { Summary, Overview, Data, Label } from './styles';
 import { getIcon } from '../lib/iconMap';
 import { Currently as CurrentlyProps } from '../types';
 import { getUnits } from './units';
-import { formatTime, formatPercent } from '../lib/formatter';
-// TODO make icon generation less bad
-const ThermIcon = getIcon('thermometer');
-const HumidIcon = getIcon('humidity');
-const WindIcon = getIcon('windspeed');
-const CloudCoverIcon = getIcon('cloudcover');
-const GustIcon = getIcon('windGust');
-const PressureIcon = getIcon('pressure');
 
+const IconBox = styled.div`
+  width: 50%;
+  margin: -30px;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`;
 export const Currently: React.FC<Props> = ({ currently, units }) => {
   const _units = getUnits(units);
   const Icon = getIcon(currently.icon);
-
   return (
-    <Flex>
-      <Summary backgroundColor="lightBlue" marginRight={[0, 0, 4]}>
-        <p>Weather at {formatTime(currently.time)}</p>
-        <div>
-          <Icon />
-        </div>
-        <p>{currently.summary}</p>
-      </Summary>
-      <Flex flexDirection="row" flexWrap="wrap">
-        <Overview>
-          <Label>Temperature</Label>
-          <ThermIcon />
-          <Data>
-            {currently.temperature} {_units.temperature}
-          </Data>
-        </Overview>
-        <Overview>
-          <Label>Humidity</Label>
-          <HumidIcon />
-          <Data>{formatPercent(currently.humidity)}</Data>
-        </Overview>
-        <Overview>
-          <Label>Wind Speed</Label>
-          <WindIcon />
-          <Data>
-            {currently.windSpeed}
-            {_units.windSpeed}
-          </Data>
-        </Overview>
-        <Overview>
-          <Label>Wind Gust</Label>
-          <GustIcon />
-          <Data>
-            {currently.windGust} {_units.windGust}
-          </Data>
-        </Overview>
-        <Overview>
-          <CloudCoverIcon />
-          <Data>{formatPercent(currently.cloudCover)}</Data>
-        </Overview>
-        <Overview>
-          <PressureIcon />
-          <Data>
-            {currently.pressure} {_units.pressure}
-          </Data>
-        </Overview>
+    <Flex padding="2rem">
+      <IconBox>
+        <Icon />
+      </IconBox>
+      <Flex
+        flex="1 1 auto"
+        width="auto"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Box fontSize={6}>
+          {currently.temperature}
+          {_units.temperature}
+        </Box>
+        <Box>Feels like {currently.apparentTemperature}</Box>
       </Flex>
     </Flex>
   );

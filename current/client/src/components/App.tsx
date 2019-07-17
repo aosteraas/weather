@@ -24,10 +24,7 @@ const App: React.FC = () => {
       </header>
       <Main>
         {weather ? (
-          <Flex flexDirection="column">
-            <Currently units={flags.units} currently={currently} />
-            <Daily units={flags.units} daily={daily} />
-          </Flex>
+          <Currently units={flags.units} currently={currently} />
         ) : (
           <div>
             <Button onClick={getLocation}>Make things happen</Button>

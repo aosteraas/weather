@@ -7,7 +7,7 @@ const Summary = styled(Box)`
   height: auto;
   border: 1px solid #fff;
   border-radius: 1rem;
-
+  flex-direction: row;
   svg {
     width: 100%;
     height: 100%;

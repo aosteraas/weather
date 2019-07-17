@@ -1,7 +1,6 @@
 import styled from 'styled-components/macro';
 
 export const AppStyle = styled.div`
-  height: 100vh;
   background-color: ${props => props.theme.colors.black};
   header {
     display: flex;
@@ -13,10 +12,6 @@ export const AppStyle = styled.div`
 `;
 
 export const Main = styled.main`
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  height: 100%;
   background-image: linear-gradient(
     180deg,
     ${p => p.theme.colors.blue} 0%,
