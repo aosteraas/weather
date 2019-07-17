@@ -4,9 +4,11 @@ export const theme = {
   colors: {
     black: `#282c34`,
     white: `#ffffff`,
+    offWhite: `#f8f8f8`,
     blue: `#2e7efc`,
     lightBlue: `#5faafc`,
-    grey: `#dfdfdf`
+    grey: `#e4e4e4`,
+    lightGrey: `#d4d4d4`
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   shadows: {

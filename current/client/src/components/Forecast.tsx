@@ -8,12 +8,18 @@ import { getIcon } from '../lib/iconMap';
 const Row = styled(Flex)`
   padding: 1rem 0;
   margin: 0 1rem 0 1rem;
+  &:not(:last-child) {
+    border-bottom: 1px solid ${p => p.theme.colors.grey};
+  }
+`;
+
+const ForecastStyle = styled(Flex)`
   border-bottom: 1px solid ${p => p.theme.colors.grey};
 `;
 
 export const Forecast: React.FC<Props> = ({ daily, units }) => {
   return (
-    <Flex flexDirection="column" backgroundColor="white" color="black">
+    <ForecastStyle flexDirection="column" backgroundColor="white" color="black">
       {daily.data.map((day, idx) => {
         const Icon = getIcon(day.icon);
         return (
@@ -31,7 +37,7 @@ export const Forecast: React.FC<Props> = ({ daily, units }) => {
           </Row>
         );
       })}
-    </Flex>
+    </ForecastStyle>
   );
 };
 
