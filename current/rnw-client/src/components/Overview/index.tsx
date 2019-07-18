@@ -5,9 +5,25 @@ import { format } from '../../../lib/format';
 import { getUnits } from '../../../lib/units';
 import { DailyData } from '../../types';
 const Item = styled.View`
+  flex-direction: row;
   align-items: center;
   height: 56;
   width: 50%;
+  border-bottom-color: #d7d7d7;
+  border-bottom-width: 1;
+`;
+const IconBox = styled.View`
+  color: #fff;
+  width: 30;
+  height: 30;
+  margin-left: 10;
+  margin-right: 10;
+  justify-content: center;
+  align-items: center;
+`;
+const Observed = styled.View`
+  padding-top: 8;
+  padding-bottom: 8;
   border-bottom-color: #d7d7d7;
   border-bottom-width: 1;
 `;
@@ -71,24 +87,35 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
     }
   };
   const _units = getUnits(units);
+  const lastObserved = format.minutesAgo(overview.time);
 
   return (
-    <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
-      {Object.keys(keys).map((k, idx) => {
-        const { icon, color, label, formatter, showUnits } = keys[k];
-        return (
-          <Item key={idx}>
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={{ color }}>
-                {formatter(overview[k])}
-                {showUnits && _units[k]}
-              </Text>
-              <Text style={{ fontSize: 12, color: `#7e8492` }}>{label}</Text>
-            </View>
-          </Item>
-        );
-      })}
-    </View>
+    <>
+      <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
+        {Object.keys(keys).map((k, idx) => {
+          const { icon, color, label, formatter, showUnits } = keys[k];
+          return (
+            <Item key={idx}>
+              <IconBox>
+                <Text>I</Text>
+              </IconBox>
+              <View style={{ flexDirection: 'column' }}>
+                <Text style={{ color }}>
+                  {formatter(overview[k])}
+                  {showUnits && _units[k]}
+                </Text>
+                <Text style={{ fontSize: 12, color: `#7e8492` }}>{label}</Text>
+              </View>
+            </Item>
+          );
+        })}
+      </View>
+      <Observed>
+        <Text style={{ fontSize: 12, textAlign: 'center' }}>
+          Last Observation {lastObserved} minutes ago
+        </Text>
+      </Observed>
+    </>
   );
 };
 
