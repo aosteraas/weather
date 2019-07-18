@@ -4,6 +4,7 @@ import { WiDaySunny } from 'weather-icons-react';
 import { useWeather } from './hooks';
 import { Currently } from './Currently';
 import { Forecast } from './Forecast';
+import { Overview } from './Overview';
 import { AppStyle, Main } from './styles';
 
 const Button = styled.button`
@@ -26,6 +27,7 @@ const App: React.FC = () => {
           <>
             <Currently units={flags.units} currently={currently} />
             <Forecast units={flags.units} daily={daily} />
+            <Overview overview={daily.data[0]} />
           </>
         ) : (
           <div>

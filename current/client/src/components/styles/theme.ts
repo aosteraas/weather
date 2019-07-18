@@ -8,7 +8,8 @@ export const theme = {
     blue: `#2e7efc`,
     lightBlue: `#5faafc`,
     grey: `#e4e4e4`,
-    lightGrey: `#d4d4d4`
+    lightGrey: `#d4d4d4`,
+    darkGrey: `#d7d7d7`
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   shadows: {
