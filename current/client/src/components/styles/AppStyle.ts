@@ -18,3 +18,11 @@ export const Main = styled.main`
     ${p => p.theme.colors.lightBlue} 74%
   );
 `;
+
+export const Spacer = styled.div`
+  height: 1.6rem;
+  background: ${p => p.theme.colors.offWhite};
+  border: 1px solid ${p => p.theme.colors.grey};
+  border-left: none;
+  border-right: none;
+`;

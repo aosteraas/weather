@@ -5,7 +5,7 @@ import { useWeather } from './hooks';
 import { Currently } from './Currently';
 import { Forecast } from './Forecast';
 import { Overview } from './Overview';
-import { AppStyle, Main } from './styles';
+import { AppStyle, Main, Spacer } from './styles';
 
 const Button = styled.button`
   color: ${p => p.theme.colors.black};
@@ -27,7 +27,9 @@ const App: React.FC = () => {
           <>
             <Currently units={flags.units} currently={currently} />
             <Forecast units={flags.units} daily={daily} />
+            <Spacer />
             <Overview units={flags.units} overview={daily.data[0]} />
+            <Spacer />
           </>
         ) : (
           <div>
