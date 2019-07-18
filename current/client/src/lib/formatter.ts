@@ -2,13 +2,13 @@ interface IFormatter {
   time(value: number): string;
   percent(value: number): string;
   temp(value: number): string;
-  wind(value: number): string;
+  round(value: number): string;
 }
 export const format: IFormatter = {
   time,
   temp,
   percent,
-  wind
+  round
 };
 
 function time(time: number): string {
@@ -23,7 +23,7 @@ function percent(value: number): string {
   return `${(value * 100).toFixed(0)}%`;
 }
 
-function wind(value: number): string {
+function round(value: number): string {
   return `${value.toFixed(0)}`;
 }
 

@@ -51,13 +51,13 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
       icon: 'wind',
       color: 'green',
       label: 'Wind Speed',
-      formatter: format.wind
+      formatter: format.round
     },
     windGust: {
       icon: 'windGust',
       color: 'green',
       label: 'Wind Gust',
-      formatter: format.wind
+      formatter: format.round
     },
     humidity: {
       icon: 'humidity',
@@ -69,7 +69,7 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
       icon: 'pressure',
       color: 'blue',
       label: 'Air Pressure',
-      formatter: value => 'asd'
+      formatter: format.round
     }
   };
   const _units = getUnits(units);
