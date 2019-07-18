@@ -11,7 +11,8 @@ export const theme: DefaultTheme = {
     lightBlue: `#5faafc`,
     grey: `#e4e4e4`,
     lightGrey: `#d4d4d4`,
-    darkGrey: `#d7d7d7`
+    darkGrey: `#d7d7d7`,
+    midGrey: `#7e8492`
   },
   icon: {
     blue: `#4ba6ed`,

@@ -25,7 +25,9 @@ export const Forecast: React.FC<Props> = ({ daily, units }) => {
               <Icon />
             </Box>
             <Box width="2rem" mx={2}>
-              <Text textAlign="right">{day.temperatureMin.toFixed(0)}</Text>
+              <Text color="midGrey" textAlign="right">
+                {day.temperatureMin.toFixed(0)}
+              </Text>
             </Box>
             <Box ml={2} width="2rem">
               <Text textAlign="right">{day.temperatureMax.toFixed(0)}</Text>

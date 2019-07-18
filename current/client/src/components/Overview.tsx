@@ -104,7 +104,9 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
                 {formatter(overview[k])}
                 {showUnits && _units[k]}
               </Text>
-              <Text fontSize="1.2rem">{label}</Text>
+              <Text color="midGrey" fontSize="1.2rem">
+                {label}
+              </Text>
             </Flex>
           </Item>
         );
