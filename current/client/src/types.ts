@@ -75,6 +75,7 @@ export interface DailyData extends BaseData {
   apparentTemperatureMinTime: number;
   apparentTemperatureMax: number;
   apparentTemperatureMaxTime: number;
+  [key: string]: string | number;
 }
 
 export interface Flags {
