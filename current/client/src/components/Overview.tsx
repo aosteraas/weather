@@ -32,51 +32,66 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
     temperatureHigh: {
       icon: 'thermometer',
       color: 'red',
-      label: 'Higest Temperature',
+      label: 'Recorded High',
+      showUnits: false,
       formatter: format.temp
     },
     temperatureLow: {
       icon: 'thermometer',
       color: 'blue',
-      label: 'Lowest Temperature',
+      label: 'Recorded Low',
+      showUnits: false,
       formatter: format.temp
     },
     precipProbability: {
       icon: 'rain',
       color: 'blue',
       label: 'Chance of Rain',
+      showUnits: false,
+      formatter: format.percent
+    },
+    humidity: {
+      icon: 'humidity',
+      color: 'blue',
+      label: 'Humidity',
+      showUnits: false,
       formatter: format.percent
     },
     windSpeed: {
       icon: 'wind',
       color: 'green',
       label: 'Wind Speed',
+      showUnits: true,
       formatter: format.round
     },
     windGust: {
       icon: 'windGust',
       color: 'green',
       label: 'Wind Gust',
+      showUnits: true,
       formatter: format.round
     },
-    humidity: {
-      icon: 'humidity',
+    cloudCover: {
+      icon: 'cloudcover',
       color: 'blue',
-      label: 'Humidity',
+      label: 'Cloud Cover',
+      showUnits: false,
       formatter: format.percent
     },
     pressure: {
       icon: 'pressure',
       color: 'blue',
       label: 'Air Pressure',
+      showUnits: true,
       formatter: format.round
     }
   };
   const _units = getUnits(units);
+  const lastObserved = format.minutesAgo(overview.time);
   return (
     <Flex backgroundColor="white" color="black" flexWrap="wrap">
       {Object.keys(keys).map((k, idx) => {
-        const { icon, color, label, formatter } = keys[k];
+        const { icon, color, label, formatter, showUnits } = keys[k];
         const Icon = getIcon(icon);
 
         return (
@@ -85,13 +100,20 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
               <Icon />
             </IconBox>
             <Flex flexDirection="column">
-              <Text color={color}>{formatter(overview[k])}</Text>
+              <Text color={color}>
+                {formatter(overview[k])}
+                {showUnits && _units[k]}
+              </Text>
               <Text fontSize="1.2rem">{label}</Text>
             </Flex>
           </Item>
         );
       })}
-      <Item width={1 / 2}>rain so far ?</Item>
+      <Box py={2} flex="1 1 auto">
+        <Text width={1} fontSize="1.2rem" textAlign="center">
+          Last Observation {lastObserved} minutes ago
+        </Text>
+      </Box>
     </Flex>
   );
 };
@@ -108,6 +130,7 @@ interface DataValue {
   icon: string;
   color: string;
   label: string;
+  showUnits: boolean;
   formatter(value: string | number): string;
 }
 

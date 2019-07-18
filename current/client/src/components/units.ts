@@ -16,6 +16,7 @@ interface Units {
   windGust: string;
   pressure: string;
   visibility: string;
+  [key: string]: string;
 }
 const si: Units = {
   nearestStormDistance: 'Km',

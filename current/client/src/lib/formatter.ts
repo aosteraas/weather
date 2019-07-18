@@ -3,12 +3,14 @@ interface IFormatter {
   percent(value: number): string;
   temp(value: number): string;
   round(value: number): string;
+  minutesAgo(value: number): number;
 }
 export const format: IFormatter = {
   time,
   temp,
   percent,
-  round
+  round,
+  minutesAgo
 };
 
 function time(time: number): string {
@@ -25,6 +27,13 @@ function percent(value: number): string {
 
 function round(value: number): string {
   return `${value.toFixed(0)}`;
+}
+
+function minutesAgo(value: number): number {
+  const ts = new Date(value * 1000).getTime();
+  const now = new Date().getTime();
+  const diff = (ts - now) / 1000 / 60;
+  return Math.abs(Math.round(diff));
 }
 
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
