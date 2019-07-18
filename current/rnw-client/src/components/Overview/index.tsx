@@ -12,7 +12,20 @@ const Item = styled.View`
   border-bottom-color: #d7d7d7;
   border-bottom-width: 1;
 `;
-const IconBox = styled.View`
+interface IIconColor {
+  blue: string;
+  red: string;
+  green: string;
+  [key: string]: string;
+}
+const icon: IIconColor = {
+  blue: `#4ba6ed`,
+  red: `#e15241`,
+  green: `#8ed25e`
+};
+const IconBox = styled.View<IconBoxProps>`
+  background-color: ${p => icon[p.iconColor]};
+  border-radius: 50;
   color: #fff;
   width: 30;
   height: 30;
@@ -96,7 +109,7 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
           const { icon, color, label, formatter, showUnits } = keys[k];
           return (
             <Item key={idx}>
-              <IconBox>
+              <IconBox iconColor={color}>
                 <Text>I</Text>
               </IconBox>
               <View style={{ flexDirection: 'column' }}>
@@ -133,4 +146,7 @@ interface DataValue {
 
 interface DataKeys {
   [key: string]: DataValue;
+}
+interface IconBoxProps {
+  iconColor: string;
 }

@@ -24,13 +24,7 @@ const Max = styled.View`
   width: 20px;
   margin-left: 8px;
 `;
-const rowStyle = {
-  flexDirection: 'row',
-  paddingTop: 10,
-  paddingBottom: 10,
-  marginLeft: 10,
-  marginRight: 10
-};
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
