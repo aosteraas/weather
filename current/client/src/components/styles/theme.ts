@@ -1,4 +1,6 @@
-export const theme = {
+import { DefaultTheme } from 'styled-components';
+
+export const theme: DefaultTheme = {
   breakpoints: ['40em', '52em', '64em'],
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
   colors: {
@@ -10,6 +12,11 @@ export const theme = {
     grey: `#e4e4e4`,
     lightGrey: `#d4d4d4`,
     darkGrey: `#d7d7d7`
+  },
+  icon: {
+    blue: `#4ba6ed`,
+    red: `#e15241`,
+    green: `#8ed25e`
   },
   space: [0, 4, 8, 16, 32, 64, 128, 256],
   shadows: {
