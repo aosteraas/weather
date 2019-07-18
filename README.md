@@ -4,7 +4,7 @@ I think weather is _awesome_ and so when I want to play with something new I mak
 
 ## Current
 
-React (feat. TypeScript) front end, and a very simple, probably not idiomatic, Elixir API server.
+React (feat. TypeScript) front end, and a very simple, probably not idiomatic, Elixir API server. The intenion was to create a reasonably faithful copy of PocketWeather.
 
 ## 2017
 
