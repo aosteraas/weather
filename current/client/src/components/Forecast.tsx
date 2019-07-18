@@ -13,13 +13,9 @@ const Row = styled(Flex)`
   }
 `;
 
-const ForecastStyle = styled(Flex)`
-  border-bottom: 1px solid ${p => p.theme.colors.grey};
-`;
-
 export const Forecast: React.FC<Props> = ({ daily, units }) => {
   return (
-    <ForecastStyle flexDirection="column" backgroundColor="white" color="black">
+    <Flex flexDirection="column" backgroundColor="white" color="black">
       {daily.data.map((day, idx) => {
         const Icon = getIcon(day.icon);
         return (
@@ -37,7 +33,7 @@ export const Forecast: React.FC<Props> = ({ daily, units }) => {
           </Row>
         );
       })}
-    </ForecastStyle>
+    </Flex>
   );
 };
 
