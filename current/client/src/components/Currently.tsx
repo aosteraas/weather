@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Flex, Box } from 'rebass';
 import { getIcon } from '../lib/iconMap';
 import { Currently as CurrentlyProps } from '../types';
-import { getUnits } from './units';
+import { format } from '../lib/formatter';
 
 const IconBox = styled.div`
   width: 50%;
@@ -13,8 +13,7 @@ const IconBox = styled.div`
     height: 100%;
   }
 `;
-export const Currently: React.FC<Props> = ({ currently, units }) => {
-  const _units = getUnits(units);
+export const Currently: React.FC<Props> = ({ currently }) => {
   const Icon = getIcon(currently.icon);
   return (
     <Flex padding="2rem">
@@ -29,11 +28,8 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
         justifyContent="center"
       >
         <Box>{currently.summary}</Box>
-        <Box fontSize={6}>
-          {currently.temperature}
-          {_units.temperature}
-        </Box>
-        <Box>Feels like {currently.apparentTemperature}</Box>
+        <Box fontSize={6}>{format.temp(currently.temperature)}</Box>
+        <Box>Feels like {format.temp(currently.apparentTemperature)}</Box>
       </Flex>
     </Flex>
   );
@@ -41,5 +37,4 @@ export const Currently: React.FC<Props> = ({ currently, units }) => {
 
 interface Props {
   currently: CurrentlyProps;
-  units: string;
 }

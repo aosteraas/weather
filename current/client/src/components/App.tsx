@@ -25,7 +25,7 @@ const App: React.FC = () => {
       <Main>
         {weather ? (
           <>
-            <Currently units={flags.units} currently={currently} />
+            <Currently currently={currently} />
             <Forecast units={flags.units} daily={daily} />
             <Spacer />
             <Overview units={flags.units} overview={daily.data[0]} />
