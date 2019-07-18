@@ -60,10 +60,12 @@ export const Forecast: React.FC<Props> = ({ daily, units }) => {
               <Text>{format.tsToDay(day.time)}</Text>
             </Day>
             <Min>
-              <Text style={{ color: `#7e8492` }}>{format.round(day.temperatureMin)}</Text>
+              <Text style={{ color: `#7e8492`, textAlign: 'right' }}>
+                {format.round(day.temperatureMin)}
+              </Text>
             </Min>
             <Max>
-              <Text>{format.round(day.temperatureMax)}</Text>
+              <Text style={{ textAlign: 'right' }}>{format.round(day.temperatureMax)}</Text>
             </Max>
           </View>
         );
