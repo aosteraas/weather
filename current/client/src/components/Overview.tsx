@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex, Box, Text } from 'rebass';
 import { getIcon } from '../lib/iconMap';
+import { getUnits } from './units';
 import { DailyData } from '../types';
-
+import { format } from '../lib/formatter';
 const Item = styled(Box)`
   display: flex;
   align-items: center;
@@ -20,54 +21,73 @@ const IconBox = styled.div<IconBoxProps>`
   border-radius: 50%;
   width: 3rem;
   height: 3rem;
+  margin: 0 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const Overview: React.FC<Props> = ({ overview }) => {
+export const Overview: React.FC<Props> = ({ overview, units }) => {
   const keys: DataKeys = {
     temperatureHigh: {
       icon: 'thermometer',
-      iconColor: 'red'
+      color: 'red',
+      label: 'Higest Temperature',
+      formatter: format.temp
     },
     temperatureLow: {
       icon: 'thermometer',
-      iconColor: 'blue'
+      color: 'blue',
+      label: 'Lowest Temperature',
+      formatter: format.temp
     },
     precipProbability: {
       icon: 'rain',
-      iconColor: 'blue'
+      color: 'blue',
+      label: 'Chance of Rain',
+      formatter: format.percent
     },
     windSpeed: {
       icon: 'wind',
-      iconColor: 'green'
+      color: 'green',
+      label: 'Wind Speed',
+      formatter: format.wind
     },
     windGust: {
       icon: 'windGust',
-      iconColor: 'green'
+      color: 'green',
+      label: 'Wind Gust',
+      formatter: format.wind
     },
     humidity: {
       icon: 'humidity',
-      iconColor: 'blue'
+      color: 'blue',
+      label: 'Humidity',
+      formatter: format.percent
     },
     pressure: {
       icon: 'pressure',
-      iconColor: 'blue'
+      color: 'blue',
+      label: 'Air Pressure',
+      formatter: value => 'asd'
     }
   };
+  const _units = getUnits(units);
   return (
     <Flex backgroundColor="white" color="black" flexWrap="wrap">
       {Object.keys(keys).map((k, idx) => {
-        const { icon, iconColor } = keys[k];
+        const { icon, color, label, formatter } = keys[k];
         const Icon = getIcon(icon);
 
         return (
           <Item key={idx} width={1 / 2}>
-            <IconBox iconColor={iconColor}>
+            <IconBox iconColor={color}>
               <Icon />
             </IconBox>
-            <Text>{overview[k]}</Text>
+            <Flex flexDirection="column">
+              <Text color={color}>{formatter(overview[k])}</Text>
+              <Text fontSize="1.2rem">{label}</Text>
+            </Flex>
           </Item>
         );
       })}
@@ -86,7 +106,9 @@ interface IconBoxProps {
 }
 interface DataValue {
   icon: string;
-  iconColor: string;
+  color: string;
+  label: string;
+  formatter(value: string | number): string;
 }
 
 interface DataKeys {
