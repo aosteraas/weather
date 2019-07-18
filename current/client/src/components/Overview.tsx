@@ -78,6 +78,7 @@ export const Overview: React.FC<Props> = ({ overview }) => {
 
 interface Props {
   overview: DailyData;
+  units: string;
 }
 
 interface IconBoxProps {

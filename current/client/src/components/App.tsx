@@ -27,7 +27,7 @@ const App: React.FC = () => {
           <>
             <Currently units={flags.units} currently={currently} />
             <Forecast units={flags.units} daily={daily} />
-            <Overview overview={daily.data[0]} />
+            <Overview units={flags.units} overview={daily.data[0]} />
           </>
         ) : (
           <div>
