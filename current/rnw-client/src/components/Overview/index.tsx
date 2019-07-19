@@ -18,13 +18,13 @@ interface IIconColor {
   green: string;
   [key: string]: string;
 }
-const icon: IIconColor = {
+const _icon: IIconColor = {
   blue: `#4ba6ed`,
   red: `#e15241`,
   green: `#8ed25e`
 };
 const IconBox = styled.View<IconBoxProps>`
-  background-color: ${p => icon[p.iconColor]};
+  background-color: ${p => _icon[p.iconColor]};
   border-radius: 50;
   color: #fff;
   width: 30;
@@ -113,7 +113,7 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
                 <Text>I</Text>
               </IconBox>
               <View style={{ flexDirection: 'column' }}>
-                <Text style={{ color }}>
+                <Text style={{ color: _icon[color] }}>
                   {formatter(overview[k])}
                   {showUnits && _units[k]}
                 </Text>

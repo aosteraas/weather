@@ -31,6 +31,7 @@ export const App = () => {
       <Forecast units={flags.units} daily={daily} />
       <Spacer />
       <Overview units={flags.units} overview={daily.data[0]} />
+      <Spacer />
     </SafeAreaView>
   );
 };
