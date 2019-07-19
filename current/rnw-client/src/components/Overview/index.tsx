@@ -4,14 +4,18 @@ import { View, Text } from 'react-native';
 import { format } from '../../../lib/format';
 import { getUnits } from '../../../lib/units';
 import { DailyData } from '../../types';
-const Item = styled.View`
+
+const Item = styled.View<ItemProps>`
   flex-direction: row;
   align-items: center;
   height: 56;
   width: 50%;
   border-bottom-color: #d7d7d7;
   border-bottom-width: 1;
+  border-left-color: ${p => (p.rightSide ? '#d7d7d7' : 'transparent')};
+  border-left-width: ${p => (p.rightSide ? 1 : 1)};
 `;
+
 interface IIconColor {
   blue: string;
   red: string;
@@ -107,8 +111,10 @@ export const Overview: React.FC<Props> = ({ overview, units }) => {
       <View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
         {Object.keys(keys).map((k, idx) => {
           const { icon, color, label, formatter, showUnits } = keys[k];
+          const rightSide = idx % 2 !== 0;
+
           return (
-            <Item key={idx}>
+            <Item rightSide={rightSide} key={idx}>
               <IconBox iconColor={color}>
                 <Text>I</Text>
               </IconBox>
@@ -149,4 +155,7 @@ interface DataKeys {
 }
 interface IconBoxProps {
   iconColor: string;
+}
+interface ItemProps {
+  rightSide: boolean;
 }
