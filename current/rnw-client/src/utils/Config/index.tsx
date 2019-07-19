@@ -14,7 +14,7 @@ interface Config {
 
 export const Config: Config = {
   app: {
-    name: 'example'
+    name: 'weather'
   },
   os: {
     android: 'android',
