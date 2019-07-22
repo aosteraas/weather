@@ -1,16 +1,10 @@
 import * as React from 'react';
-import styled from 'styled-components/native';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView, StatusBar, Platform, View } from 'react-native';
 import { Currently, Forecast, Overview } from '../../components';
+import Spacer from './Spacer';
+import StatusBarColor from './StatusBarColor';
 import { weatherData as weather } from '../../../lib/weatherData';
-const Spacer = styled.View`
-  height: 16px;
-  background-color: #f8f8f8;
-  border-bottom-color: #e4e4e4;
-  border-bottom-width: 1;
-  border-top-color: #e4e4e4;
-  border-top-width: 1;
-`;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F5FCFF',
@@ -26,12 +20,17 @@ export const App = () => {
   const { flags, currently, daily } = weather;
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Currently currently={currently} />
-      <Forecast units={flags.units} daily={daily} />
-      <Spacer />
-      <Overview units={flags.units} overview={daily.data[0]} />
-      <Spacer />
-    </SafeAreaView>
+    <>
+      <StatusBarColor backgroundColor="#2e7efc" barStyle="light-content" />
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <Currently currently={currently} />
+          <Forecast units={flags.units} daily={daily} />
+          <Spacer />
+          <Overview units={flags.units} overview={daily.data[0]} />
+          <Spacer />
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
