@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, ScrollView, StatusBar, Platform, View } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import { Currently, Forecast, Overview } from '../../components';
 import Spacer from './Spacer';
 import StatusBarColor from './StatusBarColor';
